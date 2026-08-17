@@ -2,4 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/alenu/public_html
-    - /bin/rsync -a ./ $DEPLOYPATH
+    - /bin/rsync -a --exclude='.git/' ./ $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH/.htaccess
