@@ -1,0 +1,29 @@
+﻿# Moderaterna i Ale (ale.nu)
+
+> Officiell politisk plattform, vision, valsedlar och insändare för Moderaterna i Ale kommun, lett av Henrik Fogelklou, kommunstyrelsens ordförande.
+
+## Om Moderaterna i Ale
+Moderaterna i Ale presenterar en långsiktig och ansvarsfull vision för hur Ale kommun ska växa och utvecklas. Fokus ligger på tre grundpelare för att bygga ett tryggt och livskraftigt samhälle: kvalitet i den kommunala servicen, hållbar utveckling inom skola, omsorg och näringsliv, samt en attraktiv och trygg livsmiljö för alla invånare.
+
+---
+
+## Visioner & Grundpelare
+Vår politiska berättelse och målsättning för Ale kommun är uppdelad i tre kärnområden:
+
+- [Startsida](index.html): Översikt över Moderaternas politiska vision och huvudförslag för Ale kommun.
+- [Kvalitet i toppklass](kvalitet.html): Vårt mål om att leverera utmärkt kommunal service, visa stor omsorg om skattemedel och göra Ale kommun till en mönsterkommun samt en attraktiv arbetsgivare.
+- [Utveckling i toppklass](utveckling.html): Förbättringar inom skola, omsorg och företagsklimat. Våra förslag för tidiga insatser mot psykisk ohälsa, meningsfull fritid för unga och starkt stöd till lokala företag.
+- [Livsmiljö i toppklass](livsmiljo.html): Hur vi skapar trygghet, värnar om natur och gemenskap, stödjer en levande landsbygd samt gör Ale till en stolt plats att bo på och besöka.
+
+## Kandidater, Valsedlar & Debatt
+- [Valsedlar](folkvalda.html): Komplett förteckning över alla 32 kandidater till Kommunfullmäktige i Ale 2026 samt 57 kandidater till Regionfullmäktige i Västra Götalands läns västra (med särskild framhävning av våra 4 kandidater från Ale).
+- [Publicerat i Alekuriren](insandare.html): Arkiv över samtliga publicerade debattartiklar och insändare från Moderaterna i Ale i tidningen Alekuriren.
+
+## Organisation & Medlemskap
+- [Bli medlem i Moderaterna](https://moderaterna.membersite.se/Membership/BuyMembership): Officiell anmälningssida för att gå med i partiet och stödja arbetet både lokalt och nationellt.
+- [Nuvarande uppdrag (Tromanpublik)](https://ale.tromanpublik.se/sok?Query=&Name=&Organization=&Party=5482dce6-f03f-435b-b374-0487705d7ddc&MissionType=): Sök i Ale kommuns förtroendemannaregister för nuvarande nämnd- och styrelseuppdrag.
+
+## Sociala medier & Kontakt
+- [Moderaterna i Ale på Facebook](https://www.facebook.com/Moderaterna.I.Ale): Följ våra dagliga uppdateringar, kampanjer och lokala diskussioner.
+- [Moderaterna i Ale på Instagram](https://www.instagram.com/moderaternaale/): Bilder, videor och inblickar i vår politiska vardag i Ale.
+- Redaktör & Kontakt: Erik Liljeberg (erik@ale.nu)

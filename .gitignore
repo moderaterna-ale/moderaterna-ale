@@ -1,0 +1,4 @@
+scratch/
+.tempmediaStorage/
+*.pyc
+__pycache__/

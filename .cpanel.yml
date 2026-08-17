@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/DITT_ANVANDARNAMN/public_html/
+    - /bin/rsync -a --exclude='.git*' --exclude='scratch' --exclude='material' --exclude='original' ./ $DEPLOYPATH

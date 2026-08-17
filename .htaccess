@@ -1,0 +1,5 @@
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .txt .html .css .js .md
+<FilesMatch "\.(txt|html|css|js|md)$">
+    Header set Content-Type "text/plain; charset=utf-8"
+</FilesMatch>
