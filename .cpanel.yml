@@ -1,9 +1,11 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH1=/home/alenu/public_html
-    - export DEPLOYPATH2=/home/alenu/ale.nu.hemsida.eu
-    - /bin/mkdir -p $DEPLOYPATH1
-    - /bin/mkdir -p $DEPLOYPATH2
-    - /bin/rsync -a ./ $DEPLOYPATH1/
-    - /bin/rsync -a ./ $DEPLOYPATH2/
+    - export DEPLOYPATH=/home/alenu/public_html
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/rsync -a ./ $DEPLOYPATH/
+    - /bin/chmod 755 /home/alenu/public_html
+    - /bin/chmod -R 755 $DEPLOYPATH/images
+    - /bin/chmod 644 $DEPLOYPATH/*.html
+    - /bin/chmod 644 $DEPLOYPATH/*.css
+    - /bin/chmod 644 $DEPLOYPATH/.htaccess
