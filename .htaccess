@@ -1,12 +1,8 @@
 # Force UTF-8 Encoding
 AddDefaultCharset UTF-8
-AddCharset UTF-8 .txt .html .css .js .md
-<FilesMatch "\.(txt|html|css|js|md)$">
-    Header set Content-Type "text/plain; charset=utf-8"
-</FilesMatch>
 
-# Prioritize index.html over old index.php
-DirectoryIndex index.html index.php
+# Prioritize index.html
+DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -14,8 +10,4 @@ DirectoryIndex index.html index.php
 
     # Redirect old WordPress /wp directory and all /wp/* URLs to homepage
     RewriteRule ^wp(/.*)?$ / [R=301,L]
-
-    # Redirect old index.php to root if requested directly
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
-    RewriteRule ^index\.php$ / [R=301,L]
 </IfModule>
