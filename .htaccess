@@ -1,13 +1,13 @@
-# Force UTF-8 Encoding
-AddDefaultCharset UTF-8
+RewriteEngine On
 
-# Prioritize index.html
+# Allow direct access to uploads in /wp/wp-content/uploads/ (e.g. logos and images)
+RewriteCond %{REQUEST_URI} !^/wp/wp-content/uploads/ [NC]
+
+# Redirect all other legacy WordPress requests (/wp, /wp-admin, old posts/pages) to root
+RewriteRule ^wp(/.*)?$ / [R=301,L]
+
+# Ensure index.html is the default document
 DirectoryIndex index.html
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    # Redirect old WordPress /wp directory and all /wp/* URLs to homepage
-    RewriteRule ^wp(/.*)?$ / [R=301,L]
-</IfModule>
+# UTF-8 Encoding
+AddDefaultCharset UTF-8
