@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/alenu/public_html
-    - /bin/rsync -a --exclude='.git/' ./ $DEPLOYPATH
+    - export DEPLOYPATH=/home/alenu/ale.nu.hemsida.eu
+    - /bin/rsync -a ./ $DEPLOYPATH
     - /bin/cp -f .htaccess $DEPLOYPATH/.htaccess
