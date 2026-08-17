@@ -1,6 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/alenu/public_html/
-    - /bin/rsync -a --exclude='.git*' --exclude='scratch' --exclude='material' --exclude='original' ./ $DEPLOYPATH
-    - rm -f /home/alenu/public_html/index.php
+    - export DEPLOYPATH=/home/alenu/public_html
+    - /bin/rsync -a ./ $DEPLOYPATH
