@@ -1052,11 +1052,14 @@ body {
   box-shadow: 0 4px 12px rgba(15, 37, 55, 0.15);
 }
 
-.contact-banner-info h3 {
+.contact-banner-info h2,
+.contact-banner-info h3,
+.contact-banner-title {
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--primary-dark);
   margin: 0 0 0.35rem 0;
+  line-height: 1.25;
 }
 
 .contact-banner-info p {
