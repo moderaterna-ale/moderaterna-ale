@@ -308,11 +308,31 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  font-weight: 800;
-  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+}
+
+.hero-main-phrase {
+  font-family: var(--font-sans);
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.02;
   letter-spacing: -0.03em;
   color: var(--surface-white);
+  display: block;
+}
+
+.hero-tagline {
+  font-family: Georgia, "Playfair Display", "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.25;
+  color: var(--surface-white);
+  display: block;
+  margin-top: 0.35rem;
 }
 
 .hero-subtitle {
