@@ -1,6 +1,6 @@
-# Moderaterna i Ale (ale.nu)
+﻿# Moderaterna i Ale (ale.nu)
 
-> Officiell politisk plattform, vision, valsedlar och samtliga publicerade insändare och debattartiklar för Moderaterna i Ale kommun under valet 2026. Kommunstyrelsens ordförande: Henrik Fogelklou (M).
+> Officiell politisk plattform, vision, valsedlar och samtliga publicerade insändare och debattartiklar för Moderaterna i Ale kommun under valet 2026.
 
 ## Om Moderaterna i Ale
 Moderaterna i Ale presenterar en långsiktig och ansvarsfull vision för hur Ale kommun ska växa och utvecklas med målet att bli en kommun i toppklass och nomineras till "Årets Superkommun" senast 2030. Arbetet vilar på en stabil och välskött kommunal ekonomi med sänkt skatt, prioritering av kärnverksamheterna och tre tydliga grundpelare:
@@ -148,25 +148,108 @@ Här är en komplett förteckning över samtliga 20 insändare och debattartikla
 
 ## Kandidater & Valsedlar 2026
 
-### Kommunfullmäktige i Ale (Toppkandidater)
-1. **Henrik Fogelklou**, 48 år, Kommunstyrelsens ordförande, Älvängen
-2. **Carolina Svanström**, 45 år, Utvecklingsledare, Bohus
-3. **Mikael Berglund**, 56 år, Polis, Alafors
-4. **Eddie Glans**, 36 år, Egenföretagare, Surte
-5. **Cazandra Nagy**, 33 år, Butikschef, Nol
-6. **Johan Zenténius**, 48 år, Företagsledare, Älvängen
-7. **Erik Liljeberg**, 44 år, Ingenjör, Skepplanda
-8. **Marianne Sjöö**, 71 år, Samtalsterapeut, Nödinge
-9. **Stefan Svensson**, 62 år, Ingenjör, Alafors
-10. **Peter Berglund**, 58 år, Projektledare, Nol
-*(Se samtliga 32 kandidater på [folkvalda.html](folkvalda.html))*
+### Kommunfullmäktige i Ale (Samtliga 32 kandidater)
+1. **Henrik Fogelklou**, 56 år, Arkitekt
+2. **Carolina Svanström**, 47 år, Vd
+3. **Mikael Berglund**, 54 år, Försäljningsingenjör
+4. **Eddie Glans**, 32 år, Egenföretagare
+5. **Cazandra Nagy**, 19 år, Studerande
+6. **Johan Zenténius**, 40 år, Hr-analytiker
+7. **Erik Liljeberg**, 53 år, Affärsutvecklare
+8. **Jan Skog**, 72 år, Egenföretagare
+9. **Kristina Fogelklou**, 55 år, Verksamhetsutvecklare
+10. **Jimmy Sandberg**, 50 år, Trafikspecialist
+11. **Gay Johansson**, 69 år, Pensionär
+12. **Jan Murray**, 66 år, Konsult
+13. **Fredrik Johansson**, 43 år, Projektledare
+14. **Johan Bankel**, 66 år, Civilingenjör
+15. **Carina Sandgren**, 65 år, Administratör
+16. **Lars Kopp**, 80 år, Pensionär
+17. **Gustav Institoris**, 35 år, Egenföretagare
+18. **Björn Öberg**, 36 år, Säkerhetschef
+19. **Magnus Wennergren**, 72 år, Marknadsekonom
+20. **Daniel Jakobsen**, 52 år, Projektledare
+21. **Ronald Sandgren**, 63 år, Produktionsledare
+22. **Mona Gunlycke**, 75 år, Tandsköterska
+23. **Thomas Edman**, 38 år, Polis
+24. **Mats Wallin**, 54 år, Egenföretagare
+25. **Kajsa Nilsson**, 84 år, Pensionär
+26. **Mauricio Jiménez**, 64 år, Civilingenjör
+27. **Annelie Aspholm**, 60 år, Redovisningskonsult
+28. **Maria Bokedal**, 49 år, Enhetschef
+29. **Peter Aspholm**, 59 år, Mekaniker
+30. **Susanna Mouvitz**, 53 år, Produktledare
+31. **Lennart Nilsson**, 88 år, Pensionär
+32. **Lars Andrén**, 68 år, Pensionär
 
-### Regionfullmäktige (Kandidater från Ale)
-- Plats 4: **Henrik Fogelklou**, 48 år, Kommunstyrelsens ordförande, Ale
-- Plats 17: **Carolina Svanström**, 45 år, Utvecklingsledare, Ale
-- Plats 22: **Mikael Berglund**, 56 år, Polis, Ale
-- Plats 40: **Erik Liljeberg**, 44 år, Ingenjör, Ale
-*(Se hela regionvalsedeln på [folkvalda.html](folkvalda.html))*
+---
+
+### Regionfullmäktige – Västra Götalands läns västra
+
+#### Kandidater från Ale på Regionvalsedeln:
+- Plats 22: **Gay Johansson**, 69 år, Pensionär (Ale)
+- Plats 26: **Erik Liljeberg**, 53 år, It-strateg (Ale)
+- Plats 41: **Eddie Glans**, 32 år, Ekonom (Ale)
+- Plats 50: **Alfred Johansson**, 22 år, Soldat (Ale)
+
+#### Samtliga 57 kandidater till Regionfullmäktige:
+1. **Angela Fast Torstensson**, 54 år, Företagare, Partille
+2. **Anna Vedin**, 60 år, Resurspedagog, Kungälv
+3. **Eva-Lotta Pamp**, 58 år, Egenföretagare, Alingsås
+4. **Marith Hesse**, 56 år, Kommunalråd, Partille
+5. **Evalotta Liljenzin**, 61 år, Distriktssköterska, Härryda
+6. **Sandra Svensson**, 36 år, Marknadskoordinator, Öckerö
+7. **Per Vorberg**, 58 år, Kommunalråd, Härryda
+8. **Maria Renfors**, 56 år, Civilekonom, Stenungsund
+9. **Dennis Alvdén**, 29 år, Kommunikatör, Alingsås
+10. **Kristina Nyckelgård**, 58 år, Sjuksköterska, Tjörn
+11. **Altina Peci**, 18 år, Studerande, Mölndal
+12. **Viktor Lundblad**, 30 år, Kommunalråd, Lerum
+13. **Michael Ernfors**, 68 år, Teknisk chef, Stenungsund
+14. **Linus Hedberg**, 39 år, Civilekonom, Mölndal
+15. **Kristina Söderberg**, 39 år, Statsvetare, Partille
+16. **Jeanette Andersson**, 57 år, Säljare, Lerum
+17. **Egil Midtbö**, 63 år, Präst, Stenungsund
+18. **Sara Meuller**, 33 år, Undersköterska, Kungälv
+19. **Ludvig Anderström**, 19 år, Studerande, Kungälv
+20. **Mattias Ruppel**, 48 år, Strateg, Partille
+21. **Roberth Österman**, 62 år, Brandman, Kungälv
+22. **Gay Johansson**, 69 år, Pensionär, Ale *(Kandidat från Ale)*
+23. **Otto Natt och Dag**, 55 år, Statsvetare, Partille
+24. **Alexander Axelberg Svanevik**, 18 år, Studerande, Alingsås
+25. **Vincent Nordgren**, 31 år, Hälsoekonom, Lerum
+26. **Erik Liljeberg**, 53 år, It-strateg, Ale *(Kandidat från Ale)*
+27. **Andreas Rydbo**, 52 år, Affärsområdeschef, Öckerö
+28. **Thomas Alpner**, 61 år, Projektledare, Kungälv
+29. **Björn Hesse**, 61 år, Snickare, Partille
+30. **Svante Hallberg**, 42 år, Doktor, Mölndal
+31. **Simon Pasula**, 26 år, Credit specialist, Kungälv
+32. **Johan Ahlsell**, 66 år, Verksamhetsledare, Mölndal
+33. **Rita Paparizou**, 52 år, Account manager, Partille
+34. **Samuel Kaufman**, 40 år, Kommunal yrkesrevisor, Partille
+35. **Dennis Ramberg**, 40 år, Brandman, Lerum
+36. **Louise Nilsson**, 57 år, Lärare, Kungälv
+37. **David Jerrestrand**, 35 år, Redovisningsekonom, Alingsås
+38. **Peter Carlmark**, 60 år, Leg. fysioterapeut, Mölndal
+39. **Martina Blazenin**, 55 år, Lärare, Partille
+40. **Torbjörn Kvarefelt**, 61 år, Näringslivsutvecklare, Kungälv
+41. **Eddie Glans**, 32 år, Ekonom, Ale *(Kandidat från Ale)*
+42. **Anders Jasphe**, 62 år, Företagsutvecklare, Lerum
+43. **Camilla Ardéhn**, 59 år, Rådgivare, Stenungsund
+44. **Peter Söderström**, 65 år, Civilingenjör, Härryda
+45. **Jan Sjöö**, 65 år, Affärsutvecklare, Partille
+46. **Erik Andersson**, 36 år, Projektledare, Härryda
+47. **Per H Elofsson**, 64 år, Projektledare, Mölndal
+48. **Anders Jonsson**, 70 år, Forskningsledare, Tjörn
+49. **Henrik Wenell**, 54 år, Ingenjör, Stenungsund
+50. **Alfred Johansson**, 22 år, Soldat, Ale *(Kandidat från Ale)*
+51. **Roger Nordman**, 55 år, Affärsområdeschef, Härryda
+52. **Ingemar Eliason**, 70 år, Pensionär, Öckerö
+53. **Thorsten Larsson**, 75 år, Egenföretagare, Alingsås
+54. **Johan Jönsson**, 52 år, Product manager, Stenungsund
+55. **Bertil Öhman**, 79 år, Civilingenjör, Mölndal
+56. **Claes Jansson**, 78 år, Konsult, Tjörn
+57. **Jonas Mårdbrink**, 48 år, Leg. sjukskötare, Partille
 
 ---
 
