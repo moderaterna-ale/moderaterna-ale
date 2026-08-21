@@ -1,29 +1,181 @@
-﻿# Moderaterna i Ale (ale.nu)
+# Moderaterna i Ale (ale.nu)
 
-> Officiell politisk plattform, vision, valsedlar och insändare för Moderaterna i Ale kommun, lett av Henrik Fogelklou, kommunstyrelsens ordförande.
+> Officiell politisk plattform, vision, valsedlar och samtliga publicerade insändare och debattartiklar för Moderaterna i Ale kommun under valet 2026. Kommunstyrelsens ordförande: Henrik Fogelklou (M).
 
 ## Om Moderaterna i Ale
-Moderaterna i Ale presenterar en långsiktig och ansvarsfull vision för hur Ale kommun ska växa och utvecklas. Fokus ligger på tre grundpelare för att bygga ett tryggt och livskraftigt samhälle: kvalitet i den kommunala servicen, hållbar utveckling inom skola, omsorg och näringsliv, samt en attraktiv och trygg livsmiljö för alla invånare.
+Moderaterna i Ale presenterar en långsiktig och ansvarsfull vision för hur Ale kommun ska växa och utvecklas med målet att bli en kommun i toppklass och nomineras till "Årets Superkommun" senast 2030. Arbetet vilar på en stabil och välskött kommunal ekonomi med sänkt skatt, prioritering av kärnverksamheterna och tre tydliga grundpelare:
+1. **Kvalitet i toppklass:** Leverera utmärkt kommunal service, stor omsorg om skattepengarna, vara en attraktiv arbetsgivare och framtidsrusta organisationen.
+2. **Utveckling i toppklass:** Skola där varje elev når sin fulla potential (Kunskapslyft och Utvecklingsspår), tidiga insatser mot psykisk ohälsa, värdig äldreomsorg och starkt företagsklimat.
+3. **Livsmiljö i toppklass:** Trygghet i vardagen med fältare, kameror och ordning, levande mötesplatser, tillgängliggörande av Göta älv för rekreation, samt en levande landsbygd med god framkomlighet för bil och kollektivtrafik.
 
 ---
 
-## Visioner & Grundpelare
-Vår politiska berättelse och målsättning för Ale kommun är uppdelad i tre kärnområden:
-
+## Huvudsidor & Grundpelare
 - [Startsida](index.html): Översikt över Moderaternas politiska vision och huvudförslag för Ale kommun.
-- [Kvalitet i toppklass](kvalitet.html): Vårt mål om att leverera utmärkt kommunal service, visa stor omsorg om skattemedel och göra Ale kommun till en mönsterkommun samt en attraktiv arbetsgivare.
-- [Utveckling i toppklass](utveckling.html): Förbättringar inom skola, omsorg och företagsklimat. Våra förslag för tidiga insatser mot psykisk ohälsa, meningsfull fritid för unga och starkt stöd till lokala företag.
-- [Livsmiljö i toppklass](livsmiljo.html): Hur vi skapar trygghet, värnar om natur och gemenskap, stödjer en levande landsbygd samt gör Ale till en stolt plats att bo på och besöka.
+- [Kvalitet i toppklass](kvalitet.html): Omsorg om skattemedel, målet Superkommun 2030, attraktiv arbetsgivare och framtidssäkring.
+- [Utveckling i toppklass](utveckling.html): Kunskapsskola, tidiga insatser, äldreomsorg med värdighet och näringslivsklimat.
+- [Livsmiljö i toppklass](livsmiljo.html): Trygghet i centrum och bostadsområden, levande landsbygd, friluftsområden och aktivitet vid Göta älv.
+- [Insändare](insandare.html): Arkiv över samtliga 20 publicerade debattartiklar och insändare vecka för vecka under valet 2026.
+- [Valsedlar](folkvalda.html): Förteckning över samtliga kandidater till Kommunfullmäktige och Regionfullmäktige 2026.
 
-## Kandidater, Valsedlar & Debatt
-- [Valsedlar](folkvalda.html): Komplett förteckning över alla 32 kandidater till Kommunfullmäktige i Ale 2026 samt 57 kandidater till Regionfullmäktige i Västra Götalands läns västra (med särskild framhävning av våra 4 kandidater från Ale).
-- [Publicerat i Alekuriren](insandare.html): Arkiv över samtliga publicerade debattartiklar och insändare från Moderaterna i Ale i tidningen Alekuriren.
+---
+
+## Publicerade Insändare & Debattartiklar i Alekuriren
+
+Här är en komplett förteckning över samtliga 20 insändare och debattartiklar som publicerats i tidningen Alekuriren inför valet 2026:
+
+### [Vecka 20: En ekonomi i toppklass!](insandare.html#v20)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Trots omvärldsläget står vi här idag med en kommunal ekonomi i toppklass. Vi förvaltar och tar ansvar för Alebornas skattemedel."
+- **Sammanfattning:** Vi har några år bakom oss som påverkat både världen och Ale. Rysslands invasion av Ukraina drev inflationen till nivåer vi inte sett på decennier. Stigande räntor ansträngde hårt arbetande människors privatekonomi. Det i sin tur fick följdeffekter i resten av samhällsekonomin. Även om regeringen har bekämpat inflationen och räntorna stabiliserats finns andra eftersläpande effekter som påverkat tex nybyggnation, inflyttning till Ale och inte minst ett kraftigt minskat barnafödande.
+
+### [Vecka 21: Ett föreningsliv i toppklass](insandare.html#v21)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "I kommuner som fungerar riktigt bra är föreningslivet en självskriven hörnsten. Ale kommun är en partner som stöttar och underlättar."
+- **Sammanfattning:** Ale är känt för sitt starka föreningsliv. Varje dag, året runt finns ett stort engagemang. Det tvättas västar, planeras verksamhet och arrangeras tävlingar. På helgerna står föräldrar i kiosker och säljer godis, kaffe och bullar. Tränare, lagledare och funktionärer inom allt från taekwondo till ridsport lägger otaliga timmar på att hjälpa barn och unga att växa, utvecklas och känna delaktighet. Det är oglamouröst, men just därför så värdefullt. I vardagen byggs stolthet, gemenskap och trygghet. Eldsjälarna är vår tids superhjältar.
+
+### [Vecka 22: Ett näringslivsklimat i toppklass](insandare.html#v22)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Välmående och framåtlutade företag är en grundförutsättning för ett välmående samhälle."
+- **Sammanfattning:** Moderaterna förstår hur viktigt näringslivet är för vår gemensamma ekonomi. Välmående och framåtlutade företag är en grundförutsättning för investeringar, arbetstillfällen och tillväxt. Ett starkt näringsliv ger i sin tur möjligheter för en kommun att utvecklas, erbjuda rätt service och skapa välfärd.
+
+### [Vecka 23: Vår vision för Ale](insandare.html#v23)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Vi har goda förutsättningar att ta stora, nödvändiga och viktiga steg framåt. Vi vågar spänna bågen och siktar på att bli en kommun i toppklass."
+- **Sammanfattning:** I valtider presenterar partierna ofta punktlistor med olika löften. Moderaterna presenterar i stället vår vision för Ale, där vi väver in löften om förflyttningar och framtidstro. Det faktum att vi har en ekonomi, ett föreningsliv och ett näringslivsklimat i toppklass beskriver var vi befinner oss. Ale står stadigt. Nu börjar berättelsen om framtiden.
+
+### [Vecka 24: En livsmiljö i toppklass](insandare.html#v24)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Trygghet är kärnan i en god livsmiljö. När människor trivs, känner sig hemma och är stolta har vi lyckats."
+- **Sammanfattning:** En god livsmiljö är viktig för oss alla. Vi tar frisk luft, en välmående natur och rent vatten i våra kranar, för givet. Likväl handlar det om en fungerande vardag; där det finns återvinningsstationer så att skräp och avfall hamnar på rätt ställe och inte i skogen, där bilen måste kunna samexistera som ett komplement till kollektivtrafiken och där skolskjutsen kommer i tid. Det innebär att du är trygg i att dina föräldrar får rätt vård och omsorg, att det finns en plan för att möta framtida generationers krav och förväntningar eller att det finns trygghetsboenden för de som önskar.
+
+### [Vecka 25: Kvalitet i toppklass](insandare.html#v25)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Du skall kunna lita på en kommunal organisation som präglas av gott bemötande, tillgänglighet och hög servicegrad."
+- **Sammanfattning:** Kvalitet i toppklass är en ambition som kräver ständig utveckling. Kommunen skall i alla led erbjuda rätt service, av god kvalitet. Din kontakt med kommunen skall fungera smidigt och du skall bemötas vänligt och serviceinriktat. Vår personal ska säkerställa att du får rätt hjälp, i rätt tid.
+
+### [Vecka 26: Utveckling i toppklass](insandare.html#v26)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "I Moderaternas skola ska varje barn nå sin fulla potential. Med rätt stöd når vi både resursgrupper och skapar utmaningar för högpresterande."
+- **Sammanfattning:** I Moderaternas skola ska varje barn nå sin fulla potential. Med rätt stöd når vi både resursgrupper och skapar utmaningar för högpresterande. Då kunskap är viktigare än närvaro, behöver vi hitta alternativa inlärningssätt för hemmasittare och införa individuell prövning av ledighet.
+
+### [Vecka 27: Ale, på rätt väg](insandare.html#v27)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Vi har goda skäl när vi påstår att Ale är en fantastisk kommun med rätt riktning."
+- **Sammanfattning:** Under ett antal veckor har Moderaterna, steg för steg, beskrivit var vi varit, var vi står och vart vi är på väg. Det är en tydlig vision och berättelse om dåtid, nutid och framtid. Vi har goda skäl när vi påstår att Ale är en fantastisk kommun med rätt riktning. SCB genomför kontinuerligt medborgarundersökningar i landets kommuner. Av de 112 påståenden som ingick i 2025 års undersökning, förbättrades hela 70% i Ale. I undersökningen finns ett övergripande och mycket viktig påstående: ”Kommunen är en bra plats att bo och leva på”. 92,3% tycker det. En ökning jämfört med 2023.
+
+### [Vecka 28: En vacker och välskött kommun där du vill vara](insandare.html#v28-fogelklou)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "”En plats där man vill vara” innebär att vi ska förstärka, förädla och förfina det vi har och utveckla framtida evenemang."
+- **Sammanfattning:** ”En plats där man vill vara” innebär att vi ska förstärka, förädla och förfina det vi har och utveckla framtida evenemang, besöksmål och attraktiva miljöer. Ale lockar redan idag, men vi kan göra så mycket mer. Vi har fantastiska badsjöar, vidsträckta skogar och en mäktig älv men även en skidbacke, en discgolf anläggning i världsklass, uppmärksammade motorcykeltävlingar och en unik vikingaby. I juli arrangeras O-ringen i Ale, en internationell tävling med besökare från hela världen. Ale förknippas med natur och friluftsliv, men kanske inte lika ofta med vacker arkitektur, innehållsrika parker eller omsorgsfullt utformade torgytor. Det vill vi förändra.
+
+### [Vecka 28: En plats där man vill vara](insandare.html#v28-glans)
+- **Författare:** Eddie Glans (M) (Ordförande i Samhällsbyggnadsnämnden)
+- **Typ/Publicering:** Debatt i Alekuriren
+- **Kärnbudskap:** "Ale ska erbjuda något för alla: en utflykt till älven, ett centrum med allt man behöver i vardagen och levande mötesplatser."
+- **Sammanfattning:** Ale ska erbjuda något för alla: en utflykt till älven, ett centrum med allt man behöver, lekplatser för barnen, närhet till badplatser och promenader i skogen. En plats att trivas på ger olika svar beroende på vem man frågar. Därför vill jag utveckla våra centrum så att det finns mer att göra och uppleva än idag — från pubar och utegym eller stadsparker. Att dessutom stärka kopplingen till natur och förbättra våra badplatser, det ser jag som en självklarhet. Men det räcker inte att skapa platser, de måste hänga ihop. Jag vill göra det enkelt och smidigt att röra sig mellan centrum till park och aktiviteter vidare till en längre gångbrygga vid älven så att alla ytor blir tillgängliga och attraktiva.
+
+### [Vecka 29: Fritid för unga och aktivitet vid älven](insandare.html#v29-fogelklou)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Föreställ dig en ljummen sommarkväll utmed älven. Älvens alla mötesplatser sjuder av aktivitet och folkliv."
+- **Sammanfattning:** För Moderaterna är det viktigt att de som bor i Ale, trivs och mår bra. Pensionären, föräldern eller ungdomen är alla beroende av en fungerande vardag och kommunal service av hög kvalitet. För våra ungdomar är det extra viktigt med ”en givande fritid för unga” som lockar, ger glädje och skapar samhörighet. Det är genom dessa aktiviteter som våra barn och unga lär sig sociala regler, utvecklas som människor och får positiva minnen för livet.
+
+### [Vecka 29: Liv, rörelse och aktivitet vid Älven](insandare.html#v29-svanstrom)
+- **Författare:** Carolina Svanström (M) (Moderaterna i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Vi vill bygga ett Ale där våra samhällen inte bara ligger intill älven – utan också lever tillsammans med den. Det är livsmiljö i toppklass."
+- **Sammanfattning:** Ale har något som många kommuner bara kan drömma om. Vi har Göta älv. Ändå upplever många av oss att älven är längre bort än den egentligen är. Motorvägen och järnvägen skapar ett naturligt avstånd mellan våra samhällen och vattnet, och stora delar av älvstranden präglas av industri och båtverksamhet. Det är viktiga verksamheter som har sin självklara plats, men vi tror att det finns utrymme att göra mer.
+
+### [Vecka 30: Rustade för framtiden, rätt stöd och platser att mötas på](insandare.html#v30-fogelklou)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "I mötet mellan människor byggs det inkluderande, goda och hållbara samhället. Det gör Ale tryggare, starkare och rustat för framtiden."
+- **Sammanfattning:** I en tid av krig och oro i vårt närområde behöver vi vara rustade. Vår gemensamma beredskap och trygghet bygger på familjen, företag, föreningar, skolor, lantbrukare och kommunen, där alla parter är lika viktiga. Våra skolklasser besöker lokala bondgårdar för att förstå hur mat produceras och i förskolan lär sig barnen odla, känna jorden och förstå hur något växer. Det är små steg som gör att vi klarar oss när det väl behövs.
+
+### [Vecka 30: Platser att mötas på](insandare.html#v30-glans)
+- **Författare:** Eddie Glans (M) (Ordförande i Samhällsbyggnadsnämnden)
+- **Typ/Publicering:** Debatt i Alekuriren
+- **Kärnbudskap:** "Vi behöver inte alltid bygga nytt för att skapa fler möten, vi behöver vara innovativa med det vi redan har."
+- **Sammanfattning:** Jag tror på mötesplatser där alla kan mötas – oavsett vem du är eller var du kommer ifrån. Det är inget nytt, vi jobbar redan med det. Men att skapa helt nya mötesplatser tar tid. Så idag vill jag prata om något vi kan göra mycket snabbare: låta platserna vi redan har göra mer nytta.
+
+### [Vecka 30: Ett samhälle som finns där](insandare.html#v30-svanstrom)
+- **Författare:** Carolina Svanström (M) (Moderaterna i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Utveckling handlar om att skapa ett samhälle där människor känner trygghet, gemenskap och framtidstro – genom hela livet."
+- **Sammanfattning:** Ett starkt samhälle visar sig inte när allt fungerar. Det visar sig när livet inte blir som vi har tänkt oss. När en ung människa mår dåligt. När en äldre behöver stöd för att klara vardagen. När en företagare vill satsa och skapa nya jobb. Då ska kommunen finnas där – med rätt stöd i rätt tid.
+
+### [Vecka 32: Hela Ale lever och är tryggt](insandare.html#v32-fogelklou)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "När företag och näringar växer fram, när föreningslivet blomstrar och människor bygger sina liv – då får Ale sin själ!"
+- **Sammanfattning:** I våra pendelorter läggs grunden för gemenskap, utveckling och service - men Ale är så mycket mer! Våra mindre orter, byar och landsbygd är minst lika viktiga för helheten. När företag och näringar växer fram, när föreningslivet blomstrar och människor bygger sina liv – då får Ale sin själ!
+
+### [Vecka 32: Varje elev skall ha möjlighet att nå sin fulla potential](insandare.html#v32-svanstrom)
+- **Författare:** Carolina Svanström (M) (Moderaterna i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "I Ale ska varje elev få möjlighet att nå sin fulla potential – oavsett förutsättningar. Det handlar om rätt stöd i rätt tid, höga förväntningar och en skola där kunskap står i centrum."
+- **Sammanfattning:** Som förälder vet jag att det inte finns två barn som lär sig på samma sätt. En del elever behöver extra stöd för att nå kunskapsmålen. Andra behöver större utmaningar för att fortsätta utvecklas. En riktigt bra skola ser båda. I Ale ska varje elev få möjlighet att nå sin fulla potential – oavsett förutsättningar. Det handlar om rätt stöd i rätt tid, höga förväntningar och en skola där kunskap står i centrum.
+
+### [Vecka 33: Du avgör](insandare.html#v33)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "I kommunvalet anger du Ales riktning för fyra år framåt. Välj det parti som möter dina förväntningar och som du är beredd att lita på."
+- **Sammanfattning:** Valdagen närmar sig med stormsteg. Då avgörs tre val; till Sveriges riksdag, till Regionen och till Kommunen. I Riksdagen hanteras stora och komplexa frågor som påverkar Sveriges framtid, allt från lagstiftning till försvar, ekonomi och migration. I Regionen hanteras framför allt sjukvård, kollektivtrafik och kultur. Kommunvalet handlar om dig och de frågor som påverkar din vardag och din framtid i Ale.
+
+### [Vecka 34: Ingen bilväg till Lövgärdet!](insandare.html#v34-lovgardet)
+- **Författare:** Eddie Glans (M) & Henrik Fogelklou (M) (Ordförande Samhällsbyggnad & Kommunstyrelsens ordförande)
+- **Typ/Publicering:** Debatt i Alekuriren
+- **Kärnbudskap:** "Moderaterna värnar ortsunik karaktär och historia. En bilväg till Lövgärdet hör inte hemma i Moderaternas Surte."
+- **Sammanfattning:** Surte. En ortskaraktär som har vuxit fram under lång tid. Här njuter alla åldrar av natur, gemenskap och trygghet. Livsmiljö som är viktig att bygga vidare på och utveckla. Moderaterna värnar och vill behålla ortsunik karaktär och historia men samtidigt utveckla där så är möjligt, lämpligt och genomförbart. En bilväg till Lövgärdet hör inte hemma i Moderaternas Surte.
+
+### [Vecka 34: Svar på S och C om vildsvin](insandare.html#v34-vildsvin)
+- **Författare:** Eddie Glans (M) (Ordförande i Samhällsbyggnadsnämnden)
+- **Typ/Publicering:** Svar & Debatt i Alekuriren
+- **Kärnbudskap:** "Surteborna förtjänar lösningar och trygghet, inte tomma politiska utspel lagom till valet. Moderaterna går till handling."
+- **Sammanfattning:** Oppositionen reagerar. Det är bra men överdrivet och de är som vanligt sena på bollen. Våra gator ska inte vara fulla av sopor, människor ska inte behöva vara oroliga och gräsmattor skall förbli orörda. Olyckor ska naturligtvis inte ske. Därför har jag i min roll som samhällsbyggnadsnämndens ordförande, agerat i stället för att skriva fina ord.
+
+---
+
+## Kandidater & Valsedlar 2026
+
+### Kommunfullmäktige i Ale (Toppkandidater)
+1. **Henrik Fogelklou**, 48 år, Kommunstyrelsens ordförande, Älvängen
+2. **Carolina Svanström**, 45 år, Utvecklingsledare, Bohus
+3. **Mikael Berglund**, 56 år, Polis, Alafors
+4. **Eddie Glans**, 36 år, Egenföretagare, Surte
+5. **Cazandra Nagy**, 33 år, Butikschef, Nol
+6. **Johan Zenténius**, 48 år, Företagsledare, Älvängen
+7. **Erik Liljeberg**, 44 år, Ingenjör, Skepplanda
+8. **Marianne Sjöö**, 71 år, Samtalsterapeut, Nödinge
+9. **Stefan Svensson**, 62 år, Ingenjör, Alafors
+10. **Peter Berglund**, 58 år, Projektledare, Nol
+*(Se samtliga 32 kandidater på [folkvalda.html](folkvalda.html))*
+
+### Regionfullmäktige (Kandidater från Ale)
+- Plats 4: **Henrik Fogelklou**, 48 år, Kommunstyrelsens ordförande, Ale
+- Plats 17: **Carolina Svanström**, 45 år, Utvecklingsledare, Ale
+- Plats 22: **Mikael Berglund**, 56 år, Polis, Ale
+- Plats 40: **Erik Liljeberg**, 44 år, Ingenjör, Ale
+*(Se hela regionvalsedeln på [folkvalda.html](folkvalda.html))*
+
+---
 
 ## Organisation & Medlemskap
-- [Bli medlem i Moderaterna](https://moderaterna.membersite.se/Membership/BuyMembership): Officiell anmälningssida för att gå med i partiet och stödja arbetet både lokalt och nationellt.
-- [Nuvarande uppdrag (Tromanpublik)](https://ale.tromanpublik.se/sok?Query=&Name=&Organization=&Party=5482dce6-f03f-435b-b374-0487705d7ddc&MissionType=): Sök i Ale kommuns förtroendemannaregister för nuvarande nämnd- och styrelseuppdrag.
+- [Bli medlem i Moderaterna](https://moderaterna.membersite.se/Membership/BuyMembership): Officiell anmälningssida för medlemskap.
+- [Nuvarande uppdrag (Tromanpublik)](https://ale.tromanpublik.se/sok?Query=&Name=&Organization=&Party=5482dce6-f03f-435b-b374-0487705d7ddc&MissionType=): Förtroendemannaregister för Ale kommun.
 
 ## Sociala medier & Kontakt
-- [Moderaterna i Ale på Facebook](https://www.facebook.com/Moderaterna.I.Ale): Följ våra dagliga uppdateringar, kampanjer och lokala diskussioner.
-- [Moderaterna i Ale på Instagram](https://www.instagram.com/moderaternaale/): Bilder, videor och inblickar i vår politiska vardag i Ale.
-- Redaktör & Kontakt: Erik Liljeberg (erik@ale.nu)
+- [Facebook: Moderaterna i Ale](https://www.facebook.com/Moderaterna.I.Ale)
+- [Instagram: @moderaternaale](https://www.instagram.com/moderaternaale/)
+- **E-post:** info@ale.nu
+- **Redaktör & webbansvarig:** Erik Liljeberg (erik@ale.nu)
