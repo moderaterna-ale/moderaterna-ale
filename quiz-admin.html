@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adminpanel | Ale-quizet</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --admin-bg: #f8fafc;
+      --admin-card: #ffffff;
+      --admin-primary: #002855;
+      --admin-accent: #0072CE;
+      --admin-success: #10b981;
+      --admin-warning: #f59e0b;
+      --admin-danger: #ef4444;
+    }
+
+    body {
+      background-color: var(--admin-bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .admin-wrapper {
+      flex: 1;
+      padding: 1.5rem 1rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Login Card */
+    .login-container {
+      max-width: 420px;
+      margin: 4rem auto 0;
+    }
+
+    .admin-card {
+      background: var(--admin-card);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Dashboard Header */
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dashboard-title h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--admin-primary);
+      margin: 0 0 0.25rem;
+    }
+
+    .dashboard-title p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--admin-card);
+      border-radius: 0.875rem;
+      padding: 1.25rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--admin-primary);
+    }
+
+    .stat-sub {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 0.25rem;
+    }
+
+    .stat-card.highlight-member {
+      border-left: 4px solid var(--admin-accent);
+      background: #f0f7ff;
+    }
+
+    .stat-card.highlight-member .stat-value {
+      color: var(--admin-accent);
+    }
+
+    /* Toolbar & Filters */
+    .toolbar-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 0.45rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--admin-accent);
+      color: var(--admin-accent);
+    }
+
+    .filter-btn.active {
+      background: var(--admin-primary);
+      border-color: var(--admin-primary);
+      color: #ffffff;
+    }
+
+    .search-input {
+      padding: 0.5rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      width: 240px;
+      font-family: inherit;
+    }
+
+    .btn-admin-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--admin-primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.55rem 1.15rem;
+      border-radius: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-admin-action:hover {
+      background: var(--admin-accent);
+    }
+
+    .btn-admin-outline {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      color: #475569;
+    }
+
+    .btn-admin-outline:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      background: #ffffff;
+      border-radius: 0.875rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .admin-table th {
+      background: #f8fafc;
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      color: #475569;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .admin-table th:hover {
+      color: var(--admin-primary);
+    }
+
+    .admin-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      vertical-align: middle;
+    }
+
+    .admin-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-member {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .badge-info {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .badge-perfect {
+      background: #d1fae5;
+      color: #047857;
+    }
+
+    .badge-score {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }
+
+    .btn-delete-row {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-delete-row:hover {
+      color: var(--admin-danger);
+      background: #fef2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/moderaterna-logo.svg" alt="Moderaterna Logo">
+        <div class="brand-text">
+          <span class="brand-title">Moderaterna Ale</span>
+          <span class="brand-subtitle">Adminpanel</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="quiz.html" target="_blank" class="nav-link" style="font-size: 0.88rem;">Öppna Quizet ↗</a>
+        <button id="btn-logout" class="filter-btn" style="display: none;">Logga ut</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-wrapper">
+
+    <!-- ================= LOGIN VIEW ================= -->
+    <div id="view-login" class="login-container">
+      <div class="admin-card text-center">
+        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🔒</div>
+        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--admin-primary); margin-bottom: 0.5rem;">
+          Logga in på Ale-quiz Admin
+        </h2>
+        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem;">
+          Ange administratörslösenordet för att se deltagare och resultat.
+        </p>
+
+        <form id="admin-login-form">
+          <div style="margin-bottom: 1.25rem;">
+            <input type="password" id="login-password" class="search-input" style="width: 100%; padding: 0.75rem 1rem;" placeholder="Administratörslösenord" required autofocus>
+          </div>
+          <div id="login-error" style="display: none; color: #ef4444; font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem;"></div>
+          <button type="submit" id="btn-submit-login" class="btn-admin-action" style="width: 100%; justify-content: center; padding: 0.75rem;">
+            Logga in
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= DASHBOARD VIEW ================= -->
+    <div id="view-dashboard" style="display: none;">
+      
+      <div class="dashboard-header">
+        <div class="dashboard-title">
+          <h1>Tävlingsresultat & Deltagare</h1>
+          <p id="dashboard-subtitle">Översikt över inkomna svar från Kexchoklad-kampanjen och webben.</p>
+        </div>
+        <div style="display: flex; gap: 0.6rem;">
+          <button id="btn-refresh" class="btn-admin-action btn-admin-outline">
+            <span>Uppdatera ↻</span>
+          </button>
+          <a id="btn-export-csv" href="/api/quiz/admin/export" class="btn-admin-action">
+            <span>Exportera till Excel (CSV) ↓</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Totalt antal svar</div>
+          <div id="stat-total" class="stat-value">0</div>
+          <div id="stat-source-sub" class="stat-sub">0 från Kexchoklad</div>
+        </div>
+        <div class="stat-card highlight-member">
+          <div class="stat-label">Vill bli medlemmar 🔥</div>
+          <div id="stat-member" class="stat-value">0</div>
+          <div class="stat-sub">Prioriterad uppföljning</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Vill ha nyhetsbrev</div>
+          <div id="stat-info" class="stat-value">0</div>
+          <div class="stat-sub">Lokala uppdateringar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Full pott (8/8)</div>
+          <div id="stat-perfect" class="stat-value">0</div>
+          <div class="stat-sub">Sanna Ale-experter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Snittpoäng</div>
+          <div id="stat-avg" class="stat-value">0.0</div>
+          <div class="stat-sub">av 8 möjliga</div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar-container">
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">Alla (<span id="count-all">0</span>)</button>
+          <button class="filter-btn" data-filter="member">Vill bli medlem (<span id="count-member">0</span>)</button>
+          <button class="filter-btn" data-filter="info">Vill ha info (<span id="count-info">0</span>)</button>
+          <button class="filter-btn" data-filter="perfect">8/8 Rätt (<span id="count-perfect">0</span>)</button>
+          <button class="filter-btn" data-filter="kexchoklad">Kexchoklad (<span id="count-kex">0</span>)</button>
+        </div>
+        <div>
+          <input type="text" id="table-search" class="search-input" placeholder="Sök namn, telefon, e-post...">
+        </div>
+      </div>
+
+      <!-- Submissions Table -->
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th data-sort="created_at">Tidpunkt ▾</th>
+              <th>Källa</th>
+              <th data-sort="name">Namn</th>
+              <th>Telefon & E-post</th>
+              <th data-sort="score">Poäng</th>
+              <th data-sort="tiebreaker_guess">Utslagsgissning</th>
+              <th>Önskad vinst</th>
+              <th>Status</th>
+              <th style="width: 40px;"></th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr>
+              <td colspan="9" style="text-align: center; padding: 2rem; color: #94a3b8;">
+                Laddar deltagare...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    let currentFilter = 'all';
+    let currentSort = 'created_at';
+    let currentSortDir = 'DESC';
+    let searchTimeout = null;
+
+    // Check login state on load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDashboardData();
+    });
+
+    // Login Form
+    document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pwd = document.getElementById('login-password').value;
+      const errBox = document.getElementById('login-error');
+      errBox.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/quiz/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pwd })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          loadDashboardData();
+        } else {
+          errBox.textContent = data.error || 'Fel lösenord.';
+          errBox.style.display = 'block';
+        }
+      } catch (err) {
+        errBox.textContent = 'Ett fel uppstod vid inloggning.';
+        errBox.style.display = 'block';
+      }
+    });
+
+    // Logout
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      await fetch('/api/quiz/admin/logout', { method: 'POST' });
+      document.getElementById('view-login').style.display = 'block';
+      document.getElementById('view-dashboard').style.display = 'none';
+      document.getElementById('btn-logout').style.display = 'none';
+      document.getElementById('login-password').value = '';
+    });
+
+    // Refresh button
+    document.getElementById('btn-refresh').addEventListener('click', () => {
+      loadDashboardData();
+    });
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        loadDashboardData();
+      });
+    });
+
+    // Search Input
+    document.getElementById('table-search').addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        loadDashboardData();
+      }, 300);
+    });
+
+    // Sorting headers
+    document.querySelectorAll('th[data-sort]').forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.sort;
+        if (currentSort === col) {
+          currentSortDir = currentSortDir === 'DESC' ? 'ASC' : 'DESC';
+        } else {
+          currentSort = col;
+          currentSortDir = 'DESC';
+        }
+        loadDashboardData();
+      });
+    });
+
+    // Load Data
+    async function loadDashboardData() {
+      const search = document.getElementById('table-search').value;
+      const url = `/api/quiz/admin/submissions?filter=${currentFilter}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}`;
+
+      try {
+        const res = await fetch(url);
+        if (res.status === 401) {
+          document.getElementById('view-login').style.display = 'block';
+          document.getElementById('view-dashboard').style.display = 'none';
+          document.getElementById('btn-logout').style.display = 'none';
+          return;
+        }
+
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('view-login').style.display = 'none';
+          document.getElementById('view-dashboard').style.display = 'block';
+          document.getElementById('btn-logout').style.display = 'block';
+
+          renderStats(data.stats);
+          renderTable(data.submissions);
+        }
+      } catch (err) {
+        console.error('Error loading data:', err);
+      }
+    }
+
+    // Render Stats
+    function renderStats(stats) {
+      if (!stats) return;
+      document.getElementById('stat-total').textContent = stats.total || 0;
+      document.getElementById('stat-source-sub').textContent = `${stats.fromKexchoklad || 0} från Kexchoklad`;
+      document.getElementById('stat-member').textContent = stats.wantMember || 0;
+      document.getElementById('stat-info').textContent = stats.wantInfo || 0;
+      document.getElementById('stat-perfect').textContent = stats.perfectScores || 0;
+      document.getElementById('stat-avg').textContent = stats.avgScore || '0.0';
+
+      document.getElementById('count-all').textContent = stats.total || 0;
+      document.getElementById('count-member').textContent = stats.wantMember || 0;
+      document.getElementById('count-info').textContent = stats.wantInfo || 0;
+      document.getElementById('count-perfect').textContent = stats.perfectScores || 0;
+      document.getElementById('count-kex').textContent = stats.fromKexchoklad || 0;
+    }
+
+    // Render Table
+    function renderTable(submissions) {
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+
+      if (!submissions || submissions.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9" style="text-align: center; padding: 2.5rem; color: #64748b;">
+              Inga tävlingsbidrag hittades för valt filter.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      submissions.forEach(s => {
+        const tr = document.createElement('tr');
+        const dateStr = s.created_at ? new Date(s.created_at).toLocaleString('sv-SE', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        }) : '-';
+
+        let badges = '';
+        if (s.want_member) {
+          badges += '<span class="badge badge-member">Vill bli medlem</span> ';
+        }
+        if (s.want_info) {
+          badges += '<span class="badge badge-info">Vill ha info</span> ';
+        }
+        if (!s.want_member && !s.want_info) {
+          badges += '<span style="color: #94a3b8; font-size: 0.8rem;">Inga kryss</span>';
+        }
+
+        const scoreBadge = s.score === 8 
+          ? '<span class="badge badge-perfect">8/8 ★</span>'
+          : `<span class="badge badge-score">${s.score}/8</span>`;
+
+        tr.innerHTML = `
+          <td style="color: #64748b; font-size: 0.82rem; white-space: nowrap;">${dateStr}</td>
+          <td><span class="badge badge-score" style="text-transform: capitalize;">${s.source || 'kexchoklad'}</span></td>
+          <td><strong>${escapeHtml(s.name)}</strong></td>
+          <td>
+            <div><a href="tel:${escapeHtml(s.phone)}" style="color: var(--admin-primary); text-decoration: none;">${escapeHtml(s.phone)}</a></div>
+            <div style="font-size: 0.8rem; color: #64748b;"><a href="mailto:${escapeHtml(s.email)}" style="color: #64748b;">${escapeHtml(s.email)}</a></div>
+          </td>
+          <td>${scoreBadge}</td>
+          <td><strong style="font-size: 1rem; color: var(--admin-primary);">${s.tiebreaker_guess}</strong> st</td>
+          <td style="font-size: 0.82rem; color: #475569;">${escapeHtml(s.prize_choice)}</td>
+          <td>${badges}</td>
+          <td>
+            <button class="btn-delete-row" title="Radera testinlägg" onclick="handleDelete(${s.id})">🗑</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Delete Submission
+    async function handleDelete(id) {
+      if (!confirm('Är du säker på att du vill radera detta tävlingsbidrag?')) return;
+      try {
+        const res = await fetch(`/api/quiz/admin/submission/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          loadDashboardData();
+        } else {
+          alert(data.error || 'Kunde inte radera.');
+        }
+      } catch (err) {
+        alert('Ett fel uppstod vid radering.');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

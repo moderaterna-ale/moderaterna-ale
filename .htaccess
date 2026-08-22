@@ -1,10 +1,19 @@
 RewriteEngine On
 
+# Block sensitive files & database
+<FilesMatch "^\.env|package\.json|package-lock\.json|\.db$">
+    Require all denied
+</FilesMatch>
+
 # Allow direct access to uploads in /wp/wp-content/uploads/ (e.g. logos and images)
 RewriteCond %{REQUEST_URI} !^/wp/wp-content/uploads/ [NC]
 
 # Redirect all other legacy WordPress requests (/wp, /wp-admin, old posts/pages) to root
 RewriteRule ^wp(/.*)?$ / [R=301,L]
+
+# Clean URLs for Quiz and Admin
+RewriteRule ^quiz/?$ quiz.html [L]
+RewriteRule ^quiz-admin/?$ quiz-admin.html [L]
 
 # Ensure index.html is the default document
 DirectoryIndex index.html
