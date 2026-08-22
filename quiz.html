@@ -1049,10 +1049,16 @@
     let tiebreakerGuess = null;
     let trafficSource = 'kexchoklad';
 
-    // Parse URL params for ?src=
+    // Parse URL params for ?src=, ?ref=, ?source=, ?utm_source=
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('src')) {
       trafficSource = urlParams.get('src');
+    } else if (urlParams.has('ref')) {
+      trafficSource = urlParams.get('ref');
+    } else if (urlParams.has('source')) {
+      trafficSource = urlParams.get('source');
+    } else if (urlParams.has('utm_source')) {
+      trafficSource = urlParams.get('utm_source');
     }
 
     // Screens
