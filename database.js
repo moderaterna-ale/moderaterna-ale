@@ -73,22 +73,22 @@ async function initDatabase() {
     }
   }
 
-  // Fallback till SQLite
-  const dataDir = path.join(__dirname, 'data');
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-
-  const sqlite3 = require('sqlite3').verbose();
-  const dbPath = path.join(dataDir, 'quiz.db');
-  
-  return new Promise((resolve, reject) => {
-    sqliteDb = new sqlite3.Database(dbPath, (err) => {
-      if (err) {
-        console.error('❌ Fel vid initiering av SQLite:', err);
-        return reject(err);
-      }
-      console.log('✅ Ansluten till lokal SQLite-databas:', dbPath);
+  // Fallback till SQLite (om installerat och MariaDB inte används)
+  try {
+    const sqlite3 = require('sqlite3').verbose();
+    const dataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+    const dbPath = path.join(dataDir, 'quiz.db');
+    
+    return new Promise((resolve, reject) => {
+      sqliteDb = new sqlite3.Database(dbPath, (err) => {
+        if (err) {
+          console.error('❌ Fel vid initiering av SQLite:', err);
+          return resolve();
+        }
+        console.log('✅ Ansluten till lokal SQLite-databas:', dbPath);
 
       sqliteDb.run(`
         CREATE TABLE IF NOT EXISTS quiz_submissions (
@@ -119,7 +119,9 @@ async function initDatabase() {
         });
       });
     });
-  });
+  } catch (err) {
+    console.log('ℹ️ SQLite inte tillgängligt (använder MariaDB)');
+  }
 }
 
 /**
