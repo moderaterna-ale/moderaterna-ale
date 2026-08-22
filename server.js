@@ -274,9 +274,9 @@ async function startServer() {
   try {
     await initDatabase();
     app.listen(PORT, () => {
-      console.log(`🚀 Ale Quiz Server körs på http://localhost:${PORT}`);
-      console.log(`👉 Quiz URL: http://localhost:${PORT}/quiz`);
-      console.log(`👉 Admin URL: http://localhost:${PORT}/quiz-admin`);
+      console.log(`🚀 Ale Quiz Server körs på port ${PORT}`);
+      console.log(`👉 Quiz URL: /quiz`);
+      console.log(`👉 Admin URL: /quiz-admin`);
     });
   } catch (err) {
     console.error('❌ Misslyckades med att starta servern:', err);
@@ -284,3 +284,5 @@ async function startServer() {
 }
 
 startServer();
+
+module.exports = app;
