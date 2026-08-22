@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Det stora Ale-quizet | Moderaterna i Ale</title>
-  <meta name="description" content="Tävla i det stora Ale-quizet på tågresan! Svara på 8 snabba frågor och vinn 500 kr presentkort eller middag med Henrik Fogelklou.">
+  <meta name="description" content="Tävla i det stora Ale-quizet på tågresan! Svara på 8 snabba frågor och vinn 500 kr presentkort eller middag för 2 på Mr Johanssons med Henrik Fogelklou.">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
 
     .quiz-container {
       width: 100%;
-      max-width: 640px;
+      max-width: 660px;
       margin: 0 auto;
     }
 
@@ -88,6 +88,11 @@
       margin-bottom: 1.25rem;
     }
 
+    .quiz-hero-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+
     .quiz-title {
       font-size: 1.85rem;
       font-weight: 800;
@@ -104,46 +109,129 @@
       margin-bottom: 1.75rem;
     }
 
-    .prize-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+    /* Visual Prize Showcase (Visual Split Card) */
+    .prize-showcase {
+      position: relative;
+      background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+      border: 1.5px solid #cbd5e1;
+      border-radius: 1.25rem;
+      padding: 1.5rem 1.25rem;
       margin-bottom: 2rem;
+      text-align: left;
     }
 
-    @media (max-width: 520px) {
-      .prize-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .prize-item {
-      background: #f1f5f9;
-      padding: 1rem;
-      border-radius: 0.875rem;
-      border: 1.5px dashed #cbd5e1;
+    .prize-showcase-heading {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--quiz-accent);
+      margin-bottom: 1rem;
+      text-align: center;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .prize-showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
       gap: 0.75rem;
     }
 
-    .prize-icon {
-      font-size: 1.6rem;
-      line-height: 1;
+    @media (max-width: 560px) {
+      .prize-showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
     }
 
-    .prize-item h4 {
-      font-size: 0.92rem;
-      font-weight: 700;
+    .prize-box {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .prize-box:hover {
+      border-color: var(--quiz-accent);
+      transform: translateY(-2px);
+    }
+
+    .prize-box-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .prize-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 114, 206, 0.1);
+      color: var(--quiz-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .prize-henrik-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--quiz-accent);
+      flex-shrink: 0;
+    }
+
+    .prize-box h4 {
+      font-size: 0.96rem;
+      font-weight: 800;
       color: var(--quiz-primary);
-      margin-bottom: 0.2rem;
+      margin: 0 0 0.15rem;
+      line-height: 1.3;
     }
 
-    .prize-item p {
-      font-size: 0.78rem;
+    .prize-box-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--quiz-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .prize-box p {
+      font-size: 0.82rem;
       color: #64748b;
       margin: 0;
-      line-height: 1.35;
+      line-height: 1.45;
+    }
+
+    .prize-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .prize-or-badge {
+      background: var(--quiz-primary);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.35rem 0.65rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     }
 
     /* Progress Bar */
@@ -228,22 +316,9 @@
     }
 
     .option-btn.selected-correct {
-      border-color: var(--quiz-success);
-      background: #ecfdf5;
-      color: #065f46;
-    }
-
-    .option-btn.selected-wrong {
-      border-color: var(--quiz-danger);
-      background: #fef2f2;
-      color: #991b1b;
-    }
-
-    .option-btn.highlight-correct {
-      border-color: var(--quiz-success);
-      background: #f0fdf4;
-      color: #166534;
-      border-style: dashed;
+      border-color: var(--quiz-accent);
+      background: #f0f7ff;
+      color: var(--quiz-primary);
     }
 
     .option-marker {
@@ -262,14 +337,8 @@
       transition: all 0.2s ease;
     }
 
-    .option-btn.selected-correct .option-marker,
-    .option-btn.highlight-correct .option-marker {
-      background: var(--quiz-success);
-      color: #ffffff;
-    }
-
-    .option-btn.selected-wrong .option-marker {
-      background: var(--quiz-danger);
+    .option-btn.selected-correct .option-marker {
+      background: var(--quiz-accent);
       color: #ffffff;
     }
 
@@ -284,16 +353,6 @@
       animation: fadeIn 0.3s ease;
     }
 
-    .feedback-box.correct {
-      border-left-color: var(--quiz-success);
-      background: #f0fdf4;
-    }
-
-    .feedback-box.wrong {
-      border-left-color: var(--quiz-danger);
-      background: #fef2f2;
-    }
-
     .feedback-heading {
       font-size: 0.95rem;
       font-weight: 700;
@@ -301,10 +360,8 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      color: var(--quiz-primary);
     }
-
-    .feedback-heading.correct-text { color: #166534; }
-    .feedback-heading.wrong-text { color: #991b1b; }
 
     .feedback-text {
       font-size: 0.9rem;
@@ -429,10 +486,21 @@
     }
 
     /* Result Screen */
-    .result-badge {
-      font-size: 4rem;
-      margin-bottom: 0.75rem;
-      text-align: center;
+    .result-badge-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .result-badge-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(0, 114, 206, 0.1);
+      color: var(--quiz-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -542,15 +610,18 @@
   <!-- Site Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a href="index.html" class="brand-logo">
-        <img src="images/moderaterna-logo.svg" alt="Moderaterna Logo">
+      <a href="index.html" class="brand-logo" id="header-logo-link">
+        <img src="https://ale.nu/wp/wp-content/uploads/2026/04/M_logo_bla_2021-Ikon-i-sidhuvudet-150x150.png" alt="Moderaterna i Ale">
         <div class="brand-text">
           <span class="brand-title">Moderaterna</span>
-          <span class="brand-subtitle">Ale</span>
+          <span class="brand-subtitle">i Ale</span>
         </div>
       </a>
       <div class="nav-actions">
-        <a href="index.html" class="nav-link" style="font-size: 0.9rem;">← Tillbaka till ale.nu</a>
+        <a href="index.html" class="nav-link" style="font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Tillbaka till ale.nu</span>
+        </a>
       </div>
     </div>
   </header>
@@ -562,27 +633,57 @@
       <div id="screen-welcome" class="quiz-screen active">
         <div class="quiz-card text-center">
           <div class="quiz-hero-badge">
-            <span>🍕 Pizza & Politik • Alependeln</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 2M16 19l2 2"/></svg>
+            <span>Alependeln • Kexchoklad-kampanjen</span>
           </div>
           <h1 class="quiz-title">Det stora Ale-quizet!</h1>
           <p class="quiz-subtitle">
-            Tävla under tågresan! Svara på 8 snabba frågor om vår vackra kommun och Moderaternas framtidsvisioner för Ale.
+            Tävla under tågresan! Svara på 8 snabba frågor om vår kommun och Moderaternas framtidsvisioner för Ale.
           </p>
 
-          <div class="prize-grid">
-            <div class="prize-item">
-              <div class="prize-icon">🎁</div>
-              <div>
-                <h4>500 kr Presentkort</h4>
-                <p>Gäller i butiker runt om i hela Ale kommun.</p>
-              </div>
+          <!-- Visual Prize Showcase with Henrik's Photo -->
+          <div class="prize-showcase">
+            <div class="prize-showcase-heading">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              <span>Välj mellan två fina vinster vid vinst</span>
             </div>
-            <div class="prize-item">
-              <div class="prize-icon">🍽️</div>
-              <div>
-                <h4>Middag med KSO</h4>
-                <p>Middagsbjudning med Henrik Fogelklou.</p>
+            <div class="prize-showcase-grid">
+              
+              <!-- Prize 1: 500 kr Gift Card -->
+              <div class="prize-box">
+                <div>
+                  <div class="prize-box-header">
+                    <div class="prize-icon-circle">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M12 8v14M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+                    </div>
+                    <div>
+                      <span class="prize-box-tag">Alternativ 1</span>
+                      <h4>500 kr Presentkort</h4>
+                    </div>
+                  </div>
+                  <p>Gäller i butiker runt om i hela Ale kommun.</p>
+                </div>
               </div>
+
+              <!-- OR Divider -->
+              <div class="prize-divider">
+                <span class="prize-or-badge">ELLER</span>
+              </div>
+
+              <!-- Prize 2: Dinner with Henrik at Mr Johanssons -->
+              <div class="prize-box">
+                <div>
+                  <div class="prize-box-header">
+                    <img src="images/persons/henrik-fogelklou-head.png" alt="Henrik Fogelklou" class="prize-henrik-avatar">
+                    <div>
+                      <span class="prize-box-tag">Alternativ 2</span>
+                      <h4>Middag för 2 pers</h4>
+                    </div>
+                  </div>
+                  <p>På <strong>Mr Johanssons i Älvängen</strong> tillsammans med Henrik Fogelklou (KSO).</p>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -591,8 +692,9 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
           
-          <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 1rem; margin-bottom: 0;">
-            Tar ca 2 minuter att genomföra • Tävlingen avslutas 13 september
+          <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 1rem; margin-bottom: 0; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Tar ca 2 minuter att genomföra • Tävlingen stänger 13 september kl. 20:00</span>
           </p>
         </div>
       </div>
@@ -633,12 +735,13 @@
       <div id="screen-tiebreaker" class="quiz-screen">
         <div class="quiz-card">
           <div class="quiz-hero-badge">
-            <span>🎯 Sista frågan</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Sista steget • Utslagsfråga</span>
           </div>
-          <h2 class="quiz-title">Utslagsfråga</h2>
+          <h2 class="quiz-title">Hur många deltar i tävlingen?</h2>
           <p class="quiz-subtitle">
             Tävlingen avslutas på valdagen den <strong>13 september kl. 20:00</strong>. 
-            Hur många personer tror du totalt kommer att delta i detta quiz innan tävlingen stänger?
+            Hur många personer tror du totalt kommer att ha deltagit i Ale-quizet när tävlingen stänger?
           </p>
 
           <div class="form-group">
@@ -682,16 +785,26 @@
               <div class="radio-card-group">
                 <label class="radio-card">
                   <input type="radio" name="prize_choice" value="500 kr presentkort i Ale" checked>
-                  <div>
-                    <strong>500 kr Presentkort</strong>
-                    <div style="font-size: 0.8rem; color: #64748b;">Gäller i butiker i Ale</div>
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="color: var(--quiz-accent);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M12 8v14M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+                    </div>
+                    <div>
+                      <strong>500 kr Presentkort</strong>
+                      <div style="font-size: 0.8rem; color: #64748b;">Gäller i butiker runt om i hela Ale</div>
+                    </div>
                   </div>
                 </label>
                 <label class="radio-card">
-                  <input type="radio" name="prize_choice" value="Middag med Henrik Fogelklou">
-                  <div>
-                    <strong>Middag med Henrik Fogelklou</strong>
-                    <div style="font-size: 0.8rem; color: #64748b;">Kommunstyrelsens ordförande</div>
+                  <input type="radio" name="prize_choice" value="Middag för 2 på Mr Johanssons">
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="color: var(--quiz-accent);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2M6 2v20M12 11v11M18 8v14"/></svg>
+                    </div>
+                    <div>
+                      <strong>Middag för 2 på Mr Johanssons i Älvängen</strong>
+                      <div style="font-size: 0.8rem; color: #64748b;">Tillsammans med Henrik Fogelklou (KSO)</div>
+                    </div>
                   </div>
                 </label>
               </div>
@@ -717,7 +830,8 @@
             <div id="form-error" style="display: none; color: #ef4444; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;"></div>
 
             <button type="submit" id="btn-submit-entry" class="btn-quiz-primary">
-              <span>Skicka in mitt tävlingsbidrag 🚀</span>
+              <span>Skicka in mitt tävlingsbidrag</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </button>
           </form>
         </div>
@@ -726,7 +840,11 @@
       <!-- ================= SCREEN 5: RESULT / DIPLOMA ================= -->
       <div id="screen-result" class="quiz-screen">
         <div class="quiz-card text-center">
-          <div id="result-badge" class="result-badge">🏆</div>
+          <div class="result-badge-container">
+            <div id="result-badge" class="result-badge-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+          </div>
           <div id="result-score-tag" class="result-score-tag">8 av 8 rätt</div>
           <h2 id="result-title" class="quiz-title">En sann Ale-expert!</h2>
           <p id="result-desc" class="quiz-subtitle" style="margin-bottom: 1rem;">
@@ -764,14 +882,19 @@
         <h4>3. Vem kan delta?</h4>
         <p>Tävlingen är öppen för alla. Max ett (1) tävlingsbidrag per person/telefonnummer.</p>
 
-        <h4>4. Vinster</h4>
-        <p>Vinnaren får välja mellan ett 500 kr presentkort giltigt i butiker i Ale kommun, eller en middagsbjudning med Henrik Fogelklou, kommunstyrelsens ordförande. Vinsten kan inte bytas mot kontanter.</p>
+        <h4>4. Vinster & Villkor</h4>
+        <p>Vinnaren får välja mellan följande två alternativ:</p>
+        <ul>
+          <li><strong>Alternativ 1:</strong> Ett 500 kr presentkort giltigt i butiker i Ale kommun.</li>
+          <li><strong>Alternativ 2:</strong> En tvårätters middagsbjudning för 2 personer på <strong>Restaurang Mr Johanssons i Älvängen</strong> inklusive alkoholfri dryck, i sällskap med Henrik Fogelklou, kommunstyrelsens ordförande.</li>
+        </ul>
+        <p>Vinsten kan inte bytas mot kontanter eller överlåtas till tredje part.</p>
 
         <h4>5. Vinnarurval & Presentation</h4>
-        <p>Den deltagare med flest rätt som gissat närmast det totala antalet deltagare vinner. Vinnaren utses och publiceras med förnamn på Moderaterna i Ales Facebook-sida senast den 15 september 2026 och kontaktas personligen.</p>
+        <p>Den deltagare med flest rätt som gissat närmast det totala antalet deltagare vinner. Vinnaren utses och publiceras med förnamn på Moderaterna i Ales Facebook-sida senast den 15 september 2026 och kontaktas personligen via telefon/e-post.</p>
 
         <h4>6. Personuppgifter (GDPR)</h4>
-        <p>Dina uppgifter sparas uteslutande för tävlingsadministration och kontakt av vinnaren, samt för information/medlemskap om du uttryckligen kryssat i detta. Uppgifterna säljs aldrig vidare.</p>
+        <p>Dina uppgifter sparas uteslutande för tävlingsadministration och kontakt av vinnaren, samt för lokal information/medlemskap om du uttryckligen kryssat i detta. Uppgifterna säljs eller lämnas aldrig vidare till tredje part.</p>
 
         <h4>7. Ansvarsfriskrivning</h4>
         <p>Tävlingen är inte sponsrad, administrerad eller knuten till Meta/Facebook.</p>
@@ -813,7 +936,7 @@
       try {
         const btn = document.getElementById('btn-start-quiz');
         btn.disabled = true;
-        btn.innerHTML = 'Hämtar frågor...';
+        btn.innerHTML = '<span>Laddar frågor...</span>';
 
         const res = await fetch('/api/quiz/questions');
         const data = await res.json();
@@ -833,7 +956,7 @@
       } finally {
         const btn = document.getElementById('btn-start-quiz');
         btn.disabled = false;
-        btn.innerHTML = 'Starta quizet';
+        btn.innerHTML = '<span>Starta quizet</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
       }
     });
 
@@ -935,7 +1058,7 @@
 
       const submitBtn = document.getElementById('btn-submit-entry');
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sparar ditt bidrag...';
+      submitBtn.innerHTML = '<span>Sparar ditt bidrag...</span>';
 
       try {
         const payload = {
@@ -960,7 +1083,6 @@
 
         if (result.success) {
           // Render results
-          document.getElementById('result-badge').textContent = result.diplomaBadge || '🏆';
           document.getElementById('result-score-tag').textContent = `${result.score} av ${result.totalQuestions} rätt`;
           document.getElementById('result-title').textContent = result.diplomaTitle || 'Snyggt jobbat!';
 
@@ -1002,7 +1124,7 @@
         errBox.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Skicka in mitt tävlingsbidrag 🚀';
+        submitBtn.innerHTML = '<span>Skicka in mitt tävlingsbidrag</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
       }
     });
 

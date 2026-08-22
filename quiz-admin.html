@@ -51,6 +51,18 @@
       margin-bottom: 1.5rem;
     }
 
+    .login-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(0, 114, 206, 0.1);
+      color: var(--admin-accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
     /* Dashboard Header */
     .dashboard-header {
       display: flex;
@@ -97,6 +109,9 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .stat-value {
@@ -281,9 +296,11 @@
       border: none;
       color: #94a3b8;
       cursor: pointer;
-      font-size: 1.1rem;
-      padding: 0.2rem 0.4rem;
+      padding: 0.3rem;
       border-radius: 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.2s ease;
     }
 
@@ -298,15 +315,18 @@
   <!-- Site Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a href="index.html" class="brand-logo">
-        <img src="images/moderaterna-logo.svg" alt="Moderaterna Logo">
+      <a href="index.html" class="brand-logo" id="header-logo-link">
+        <img src="https://ale.nu/wp/wp-content/uploads/2026/04/M_logo_bla_2021-Ikon-i-sidhuvudet-150x150.png" alt="Moderaterna i Ale">
         <div class="brand-text">
-          <span class="brand-title">Moderaterna Ale</span>
+          <span class="brand-title">Moderaterna</span>
           <span class="brand-subtitle">Adminpanel</span>
         </div>
       </a>
       <div class="nav-actions">
-        <a href="quiz.html" target="_blank" class="nav-link" style="font-size: 0.88rem;">Öppna Quizet ↗</a>
+        <a href="quiz.html" target="_blank" class="nav-link" style="font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+          <span>Öppna Quizet</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
         <button id="btn-logout" class="filter-btn" style="display: none;">Logga ut</button>
       </div>
     </div>
@@ -317,7 +337,9 @@
     <!-- ================= LOGIN VIEW ================= -->
     <div id="view-login" class="login-container">
       <div class="admin-card text-center">
-        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🔒</div>
+        <div class="login-icon-box">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
         <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--admin-primary); margin-bottom: 0.5rem;">
           Logga in på Ale-quiz Admin
         </h2>
@@ -331,7 +353,7 @@
           </div>
           <div id="login-error" style="display: none; color: #ef4444; font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem;"></div>
           <button type="submit" id="btn-submit-login" class="btn-admin-action" style="width: 100%; justify-content: center; padding: 0.75rem;">
-            Logga in
+            <span>Logga in</span>
           </button>
         </form>
       </div>
@@ -347,10 +369,12 @@
         </div>
         <div style="display: flex; gap: 0.6rem;">
           <button id="btn-refresh" class="btn-admin-action btn-admin-outline">
-            <span>Uppdatera ↻</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <span>Uppdatera</span>
           </button>
           <a id="btn-export-csv" href="/api/quiz/admin/export" class="btn-admin-action">
-            <span>Exportera till Excel (CSV) ↓</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span>Exportera till Excel (CSV)</span>
           </a>
         </div>
       </div>
@@ -358,27 +382,42 @@
       <!-- KPI Stats -->
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-label">Totalt antal svar</div>
+          <div class="stat-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Totalt antal svar</span>
+          </div>
           <div id="stat-total" class="stat-value">0</div>
           <div id="stat-source-sub" class="stat-sub">0 från Kexchoklad</div>
         </div>
         <div class="stat-card highlight-member">
-          <div class="stat-label">Vill bli medlemmar 🔥</div>
+          <div class="stat-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            <span>Vill bli medlemmar</span>
+          </div>
           <div id="stat-member" class="stat-value">0</div>
           <div class="stat-sub">Prioriterad uppföljning</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Vill ha nyhetsbrev</div>
+          <div class="stat-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>Vill ha nyhetsbrev</span>
+          </div>
           <div id="stat-info" class="stat-value">0</div>
           <div class="stat-sub">Lokala uppdateringar</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Full pott (8/8)</div>
+          <div class="stat-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <span>Full pott (8/8)</span>
+          </div>
           <div id="stat-perfect" class="stat-value">0</div>
           <div class="stat-sub">Sanna Ale-experter</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Snittpoäng</div>
+          <div class="stat-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Snittpoäng</span>
+          </div>
           <div id="stat-avg" class="stat-value">0.0</div>
           <div class="stat-sub">av 8 möjliga</div>
         </div>
@@ -591,7 +630,7 @@
         }
 
         const scoreBadge = s.score === 8 
-          ? '<span class="badge badge-perfect">8/8 ★</span>'
+          ? '<span class="badge badge-perfect">8/8</span>'
           : `<span class="badge badge-score">${s.score}/8</span>`;
 
         tr.innerHTML = `
@@ -607,7 +646,9 @@
           <td style="font-size: 0.82rem; color: #475569;">${escapeHtml(s.prize_choice)}</td>
           <td>${badges}</td>
           <td>
-            <button class="btn-delete-row" title="Radera testinlägg" onclick="handleDelete(${s.id})">🗑</button>
+            <button class="btn-delete-row" title="Radera testinlägg" onclick="handleDelete(${s.id})">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
           </td>
         `;
         tbody.appendChild(tr);
