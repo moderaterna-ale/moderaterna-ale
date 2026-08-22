@@ -1,23 +1,19 @@
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/alenu/quiz-app"
-PassengerBaseURI "/"
-PassengerNodejs "/home/alenu/nodevenv/quiz-app/22/bin/node"
-PassengerAppType node
-PassengerStartupFile server.js
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
-
 RewriteEngine On
 
-# Block sensitive files & database
+# Block sensitive files
 <FilesMatch "^\.env|package\.json|package-lock\.json|\.db$">
     Require all denied
 </FilesMatch>
 
-# Allow direct access to uploads in /wp/wp-content/uploads/ (e.g. logos and images)
+# Allow direct access to uploads in /wp/wp-content/uploads/
 RewriteCond %{REQUEST_URI} !^/wp/wp-content/uploads/ [NC]
 
-# Redirect all other legacy WordPress requests (/wp, /wp-admin, old posts/pages) to root
+# Redirect legacy WordPress requests (/wp, /wp-admin, old posts) to root
 RewriteRule ^wp(/.*)?$ / [R=301,L]
+
+# API routes -> api.php
+RewriteRule ^api/quiz/(.*)$ api.php?route=$1 [QSA,L]
+RewriteRule ^api/(.*)$ api.php?route=$1 [QSA,L]
 
 # Clean URLs for Quiz and Admin
 RewriteRule ^quiz/?$ quiz.html [L]

@@ -13,5 +13,6 @@ deployment:
     - /bin/chmod 644 $DEPLOYPATH/*.html
     - /bin/chmod 644 $DEPLOYPATH/*.css
     - /bin/chmod 644 $DEPLOYPATH/*.js
+    - /bin/chmod 644 $DEPLOYPATH/*.php
     - /bin/chmod 644 $DEPLOYPATH/.htaccess
     - /bin/touch $NODEPATH/tmp/restart.txt

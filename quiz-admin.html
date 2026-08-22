@@ -495,6 +495,9 @@
 
         const data = await res.json();
         if (data.success) {
+          if (data.token) {
+            localStorage.setItem('quiz_admin_token', data.token);
+          }
           loadDashboardData();
         } else {
           errBox.textContent = data.error || 'Fel lösenord.';
@@ -508,6 +511,7 @@
 
     // Logout
     document.getElementById('btn-logout').addEventListener('click', async () => {
+      localStorage.removeItem('quiz_admin_token');
       await fetch('/api/quiz/admin/logout', { method: 'POST' });
       document.getElementById('view-login').style.display = 'block';
       document.getElementById('view-dashboard').style.display = 'none';
@@ -546,7 +550,6 @@
           currentSortDir = currentSortDir === 'DESC' ? 'ASC' : 'DESC';
         } else {
           currentSort = col;
-          currentSortDir = 'DESC';
         }
         loadDashboardData();
       });
@@ -556,9 +559,11 @@
     async function loadDashboardData() {
       const search = document.getElementById('table-search').value;
       const url = `/api/quiz/admin/submissions?filter=${currentFilter}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}`;
+      const token = localStorage.getItem('quiz_admin_token');
+      const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { headers });
         if (res.status === 401) {
           document.getElementById('view-login').style.display = 'block';
           document.getElementById('view-dashboard').style.display = 'none';
