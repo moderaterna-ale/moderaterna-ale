@@ -13,11 +13,12 @@
   <style>
     :root {
       --quiz-primary: #002855;
-      --quiz-accent: #0072CE;
+      --quiz-accent: #007bb0;
+      --quiz-accent-hover: #006694;
       --quiz-success: #10b981;
       --quiz-danger: #ef4444;
       --quiz-card-bg: #ffffff;
-      --quiz-bg: #f8fafc;
+      --quiz-bg: #edf2f7;
     }
 
     body {
@@ -25,6 +26,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .quiz-page-wrapper {
@@ -32,12 +34,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1.5rem 1rem 3rem;
+      justify-content: center;
+      padding: 2rem 1rem 3.5rem;
     }
 
     .quiz-container {
       width: 100%;
-      max-width: 660px;
+      max-width: 640px;
       margin: 0 auto;
     }
 
@@ -58,160 +61,226 @@
     /* Card Styling */
     .quiz-card {
       background: #ffffff;
-      border-radius: 1.25rem;
-      padding: 2rem 1.75rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 40, 85, 0.08), 0 8px 10px -6px rgba(0, 40, 85, 0.04);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 1.5rem;
+      padding: 2.25rem 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 40, 85, 0.1), 0 0 1px 1px rgba(0, 40, 85, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.9);
       margin-bottom: 1.5rem;
     }
 
     @media (max-width: 480px) {
       .quiz-card {
-        padding: 1.25rem 1rem;
-        border-radius: 1rem;
+        padding: 1.5rem 1.15rem;
+        border-radius: 1.25rem;
       }
     }
 
-    .quiz-title {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--quiz-primary);
-      line-height: 1.25;
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .quiz-subtitle {
-      font-size: 1rem;
-      color: #475569;
-      line-height: 1.5;
-      margin-bottom: 1.25rem;
-    }
-
-    /* Visual Prize Showcase (Visual Split Card) */
-    .prize-showcase {
-      position: relative;
-      background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
-      border: 1.5px solid #cbd5e1;
-      border-radius: 1.25rem;
-      padding: 1.5rem 1.25rem;
-      margin-bottom: 2rem;
-      text-align: left;
-    }
-
-    .prize-showcase-heading {
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--quiz-accent);
-      margin-bottom: 1rem;
-      text-align: center;
+    .quiz-card-header {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-
-    .prize-showcase-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: stretch;
-      gap: 0.75rem;
-    }
-
-    @media (max-width: 560px) {
-      .prize-showcase-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-    }
-
-    .prize-box {
-      background: #ffffff;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 1rem;
-      padding: 1.15rem;
-      display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .prize-box:hover {
-      border-color: var(--quiz-accent);
-      transform: translateY(-2px);
-    }
-
-    .prize-box-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      align-items: flex-start;
+      gap: 1rem;
       margin-bottom: 0.6rem;
     }
 
-    .prize-icon-circle {
-      width: 44px;
-      height: 44px;
+    .quiz-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--quiz-primary);
+      line-height: 1.18;
+      margin: 0;
+      letter-spacing: -0.01em;
+      text-align: left;
+    }
+
+    @media (max-width: 480px) {
+      .quiz-title {
+        font-size: 1.85rem;
+      }
+    }
+
+    .m-circle-logo {
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: rgba(0, 114, 206, 0.1);
-      color: var(--quiz-accent);
+      background: #002855;
+      color: #ffffff;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 40, 85, 0.25);
     }
 
-    .prize-henrik-avatar {
-      width: 46px;
-      height: 46px;
+    .quiz-subtitle {
+      font-size: 1rem;
+      color: #334155;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    /* Prize Accordion / Showcase */
+    .prize-accordion {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 1.15rem;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .prize-accordion-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 0.9rem 1.25rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--quiz-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .prize-accordion-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .prize-accordion-btn .toggle-icon {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--quiz-accent);
+      transition: transform 0.3s ease;
+    }
+
+    .prize-accordion-content {
+      padding: 0.5rem 1.25rem 1.25rem;
+      display: block;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .prize-grid-gemini {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 580px) {
+      .prize-grid-gemini {
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+    }
+
+    .gemini-prize-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex: 1;
+      text-align: left;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .gold-card-graphic {
+      width: 86px;
+      height: 56px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #d4af37 0%, #aa771c 45%, #fedb72 70%, #d4af37 100%);
+      box-shadow: 0 3px 8px rgba(170, 119, 28, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 3px;
+    }
+
+    .gold-card-inner {
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .gold-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #3b2803;
+      line-height: 1.1;
+    }
+
+    .gold-card-sub {
+      font-size: 0.62rem;
+      font-weight: 800;
+      color: #3b2803;
+      letter-spacing: 0.04em;
+    }
+
+    .gemini-henrik-avatar {
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--quiz-accent);
       flex-shrink: 0;
     }
 
-    .prize-box h4 {
-      font-size: 0.96rem;
-      font-weight: 800;
-      color: var(--quiz-primary);
-      margin: 0 0 0.15rem;
-      line-height: 1.3;
+    .gemini-prize-text {
+      display: flex;
+      flex-direction: column;
     }
 
-    .prize-box-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
+    .gemini-prize-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
       color: var(--quiz-accent);
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.1rem;
     }
 
-    .prize-box p {
-      font-size: 0.82rem;
+    .gemini-prize-text h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--quiz-primary);
+      margin: 0 0 0.2rem;
+      line-height: 1.25;
+    }
+
+    .gemini-prize-text p {
+      font-size: 0.78rem;
       color: #64748b;
       margin: 0;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
-    .prize-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .prize-or-badge {
-      background: var(--quiz-primary);
-      color: #ffffff;
+    .gemini-divider {
       font-size: 0.75rem;
       font-weight: 800;
-      padding: 0.35rem 0.65rem;
-      border-radius: 9999px;
-      text-transform: uppercase;
+      color: #94a3b8;
       letter-spacing: 0.05em;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      white-space: nowrap;
     }
 
     /* Progress Bar */
@@ -611,55 +680,57 @@
 
       <!-- ================= SCREEN 1: WELCOME ================= -->
       <div id="screen-welcome" class="quiz-screen active">
-        <div class="quiz-card text-center">
-          <h1 class="quiz-title">Det stora Ale-quizet!</h1>
+        <div class="quiz-card">
+          <div class="quiz-card-header">
+            <h1 class="quiz-title">Det stora Ale-quizet!</h1>
+            <div class="m-circle-logo" title="Moderaterna">M</div>
+          </div>
+          
           <p class="quiz-subtitle">
             Tävla under tågresan! Svara på 8 snabba frågor om vår kommun och Moderaternas framtidsvisioner för Ale.
           </p>
 
-          <!-- Visual Prize Showcase with Henrik's Photo -->
-          <div class="prize-showcase">
-            <div class="prize-showcase-heading">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-              <span>Välj mellan två fina vinster vid vinst</span>
-            </div>
-            <div class="prize-showcase-grid">
-              
-              <!-- Prize 1: 500 kr Gift Card -->
-              <div class="prize-box">
-                <div>
-                  <div class="prize-box-header">
-                    <div class="prize-icon-circle">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M12 8v14M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
-                    </div>
-                    <div>
-                      <span class="prize-box-tag">Alternativ 1</span>
-                      <h4>500 kr Presentkort</h4>
+          <!-- Prize Accordion / Showcase -->
+          <div class="prize-accordion">
+            <button type="button" id="btn-toggle-prizes" class="prize-accordion-btn">
+              <span id="prize-toggle-text">Klicka för att se vinsterna</span>
+              <span id="prize-toggle-icon" class="toggle-icon">−</span>
+            </button>
+            
+            <div id="prize-content" class="prize-accordion-content">
+              <div class="prize-grid-gemini">
+                
+                <!-- Prize 1: Golden Gift Card -->
+                <div class="gemini-prize-card">
+                  <div class="gold-card-graphic">
+                    <div class="gold-card-inner">
+                      <span class="gold-card-title">Presentkort</span>
+                      <span class="gold-card-sub">Ale</span>
                     </div>
                   </div>
-                  <p>Gäller i butiker runt om i hela Ale kommun.</p>
-                </div>
-              </div>
-
-              <!-- OR Divider -->
-              <div class="prize-divider">
-                <span class="prize-or-badge">ELLER</span>
-              </div>
-
-              <!-- Prize 2: Dinner with Henrik at Mr Johanssons -->
-              <div class="prize-box">
-                <div>
-                  <div class="prize-box-header">
-                    <img src="images/persons/henrik-fogelklou-head.png" alt="Henrik Fogelklou" class="prize-henrik-avatar">
-                    <div>
-                      <span class="prize-box-tag">Alternativ 2</span>
-                      <h4>Middag för 2 pers</h4>
-                    </div>
+                  <div class="gemini-prize-text">
+                    <span class="gemini-prize-badge">VINST 1</span>
+                    <h4>Presentkort Ale</h4>
+                    <p>Gäller i butiker runt om i hela Ale kommun.</p>
                   </div>
-                  <p>På <strong>Mr Johanssons i Älvängen</strong> tillsammans med Henrik Fogelklou, kommunstyrelsens ordförande.</p>
                 </div>
-              </div>
 
+                <!-- Divider -->
+                <div class="gemini-divider">
+                  <span>— ELLER —</span>
+                </div>
+
+                <!-- Prize 2: Dinner with Henrik -->
+                <div class="gemini-prize-card">
+                  <img src="images/persons/henrik-fogelklou-head.png" alt="Henrik Fogelklou" class="gemini-henrik-avatar">
+                  <div class="gemini-prize-text">
+                    <span class="gemini-prize-badge">VINST 2</span>
+                    <h4>Middag för 2 pers</h4>
+                    <p>På <strong>Mr Johanssons i Älvängen</strong> tillsammans med Henrik Fogelklou, kommunstyrelsens ordförande.</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
 
@@ -668,8 +739,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
           
-          <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 1rem; margin-bottom: 0; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <p style="font-size: 0.82rem; color: #64748b; margin-top: 1.15rem; margin-bottom: 0; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span>Tar ca 2 minuter att genomföra • Tävlingen stänger 13 september kl. 20:00</span>
           </p>
         </div>
@@ -1022,6 +1093,19 @@
         question: q.question,
         options: shuffle(q.options).map(o => ({ id: o.id, text: o.text }))
       }));
+    }
+
+    // Toggle Prize Accordion
+    const btnTogglePrizes = document.getElementById('btn-toggle-prizes');
+    const prizeContent = document.getElementById('prize-content');
+    const prizeToggleIcon = document.getElementById('prize-toggle-icon');
+    
+    if (btnTogglePrizes) {
+      btnTogglePrizes.addEventListener('click', () => {
+        const isHidden = prizeContent.style.display === 'none';
+        prizeContent.style.display = isHidden ? 'block' : 'none';
+        prizeToggleIcon.textContent = isHidden ? '−' : '+';
+      });
     }
 
     // Start Quiz
