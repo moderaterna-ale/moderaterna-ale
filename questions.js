@@ -29,13 +29,13 @@ const questions = [
   {
     id: 3,
     category: 'Allmän',
-    question: 'I vilken ort i kommunen hittar man den kända rekonstruerade Vikingagården och ett av Ales mest populära historiska besöksmål?',
+    question: 'Vilket vidsträckt och mytomspunnet vildmarksområde med hundratals sjöar och fina vandringsleder breder ut sig i östra delen av Ale kommun?',
     options: [
-      { id: 'opt_1', text: 'Älvängen', isCorrect: true },
-      { id: 'opt_2', text: 'Nol', isCorrect: false },
-      { id: 'opt_3', text: 'Gamla Ullevi', isCorrect: false }
+      { id: 'opt_1', text: 'Risveden', isCorrect: true },
+      { id: 'opt_2', text: 'Svartedalen', isCorrect: false },
+      { id: 'opt_3', text: 'Sandsjöbacka', isCorrect: false }
     ],
-    explanation: 'Ale Vikingagård ligger vackert i Älvängen intill Göta älv och lockar besökare och historieintresserade från när och fjärran!'
+    explanation: 'Risveden är ett av Västsveriges största sammanhängande vildmarksområden och bjuder på fantastiska naturupplevelser, bad och leder för alla Alebor!'
   },
   {
     id: 4,
