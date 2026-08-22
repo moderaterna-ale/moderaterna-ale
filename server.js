@@ -16,7 +16,7 @@ const { getClientQuestions, gradeSubmission } = require('./questions');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'ale_moderaterna_quiz_secret_key_2026';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ModeraternaAle2026!';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Ale-M2026!SuperK0mmun#982';
 
 // Middleware
 app.use(cors());
