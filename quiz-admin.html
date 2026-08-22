@@ -445,6 +445,7 @@
               <th data-sort="created_at">Tidpunkt ▾</th>
               <th>Källa</th>
               <th data-sort="name">Namn</th>
+              <th data-sort="city">Hemort</th>
               <th>Telefon & E-post</th>
               <th data-sort="score">Poäng</th>
               <th data-sort="tiebreaker_guess">Utslagsgissning</th>
@@ -455,7 +456,7 @@
           </thead>
           <tbody id="table-body">
             <tr>
-              <td colspan="9" style="text-align: center; padding: 2rem; color: #94a3b8;">
+              <td colspan="10" style="text-align: center; padding: 2rem; color: #94a3b8;">
                 Laddar deltagare...
               </td>
             </tr>
@@ -637,6 +638,7 @@
           <td style="color: #64748b; font-size: 0.82rem; white-space: nowrap;">${dateStr}</td>
           <td><span class="badge badge-score" style="text-transform: capitalize;">${s.source || 'kexchoklad'}</span></td>
           <td><strong>${escapeHtml(s.name)}</strong></td>
+          <td><span style="font-weight: 600; color: #334155;">${escapeHtml(s.city || '-')}</span></td>
           <td>
             <div><a href="tel:${escapeHtml(s.phone)}" style="color: var(--admin-primary); text-decoration: none;">${escapeHtml(s.phone)}</a></div>
             <div style="font-size: 0.8rem; color: #64748b;"><a href="mailto:${escapeHtml(s.email)}" style="color: #64748b;">${escapeHtml(s.email)}</a></div>

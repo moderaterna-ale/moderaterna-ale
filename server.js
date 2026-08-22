@@ -78,23 +78,23 @@ app.get('/api/quiz/questions', (req, res) => {
 app.post('/api/quiz/submit', async (req, res) => {
   try {
     const {
-      source = 'kexchoklad',
+      source,
       name,
+      city,
       phone,
       email,
-      answers = {},
+      answers,
       tiebreakerGuess,
       prizeChoice,
-      wantInfo = false,
-      wantMember = false
+      wantInfo,
+      wantMember
     } = req.body;
 
-    // Grundvalidering
-    if (!name || !phone || !email) {
-      return res.status(400).json({ error: 'Vänligen fyll i namn, telefonnummer och e-postadress.' });
+    if (!name || !phone || !email || !city) {
+      return res.status(400).json({ error: 'Vänligen fyll i namn, hemort, telefon och e-postadress.' });
     }
 
-    if (tiebreakerGuess === undefined || tiebreakerGuess === null || isNaN(parseInt(tiebreakerGuess, 10))) {
+    if (tiebreakerGuess === undefined || tiebreakerGuess === null || isNaN(tiebreakerGuess)) {
       return res.status(400).json({ error: 'Vänligen ange din gissning på utslagsfrågan.' });
     }
 
@@ -113,6 +113,7 @@ app.post('/api/quiz/submit', async (req, res) => {
     const insertId = await saveSubmission({
       source: source || 'kexchoklad',
       name: name.trim(),
+      city: city.trim(),
       phone: phone.trim(),
       email: email.trim().toLowerCase(),
       score: gradeResult.score,
@@ -216,7 +217,7 @@ app.get('/api/quiz/admin/export', authenticateAdmin, async (req, res) => {
     const submissions = await getSubmissions('all', '', 'created_at', 'DESC');
 
     // CSV Header med UTF-8 BOM (\uFEFF) så att Excel på Windows öppnar å, ä, ö felfritt
-    let csv = '\uFEFFID;Datum & Tid;Källa;Namn;Telefon;E-post;Poäng;Totalt;Utslagsgissning;Önskad Vinst;Vill ha info;Vill bli medlem\r\n';
+    let csv = '\uFEFFID;Datum & Tid;Källa;Namn;Hemort;Telefon;E-post;Poäng;Totalt;Utslagsgissning;Önskad Vinst;Vill ha info;Vill bli medlem\r\n';
 
     for (const s of submissions) {
       const dateStr = s.created_at ? new Date(s.created_at).toLocaleString('sv-SE') : '';
@@ -230,6 +231,7 @@ app.get('/api/quiz/admin/export', authenticateAdmin, async (req, res) => {
         clean(dateStr),
         clean(s.source),
         clean(s.name),
+        clean(s.city),
         clean(s.phone),
         clean(s.email),
         s.score,

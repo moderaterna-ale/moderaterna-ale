@@ -40,6 +40,7 @@ async function initDatabase() {
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           source VARCHAR(50) DEFAULT 'kexchoklad',
           name VARCHAR(150) NOT NULL,
+          city VARCHAR(100) DEFAULT '',
           phone VARCHAR(50) NOT NULL,
           email VARCHAR(150) NOT NULL,
           score INT NOT NULL,
@@ -56,6 +57,14 @@ async function initDatabase() {
           INDEX idx_want_member (want_member)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
       `);
+
+      // Migration för befintlig tabell om city saknas
+      try {
+        await conn.query(`ALTER TABLE quiz_submissions ADD COLUMN city VARCHAR(100) DEFAULT '' AFTER name;`);
+      } catch (e) {
+        // Ignorera om kolumnen redan finns
+      }
+
       conn.release();
       dbType = 'mysql';
       return;
@@ -83,10 +92,11 @@ async function initDatabase() {
 
       sqliteDb.run(`
         CREATE TABLE IF NOT EXISTS quiz_submissions (
-          id INTEGER PRIMARY KEY AUTO_INCREMENT,
+          id INTEGER PRIMARY KEY,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           source TEXT DEFAULT 'kexchoklad',
           name TEXT NOT NULL,
+          city TEXT DEFAULT '',
           phone TEXT NOT NULL,
           email TEXT NOT NULL,
           score INTEGER NOT NULL,
@@ -100,35 +110,13 @@ async function initDatabase() {
           user_agent TEXT
         )
       `, (err) => {
-        if (err) {
-          // sqlite INTEGER PRIMARY KEY handles autoincrement without keyword
-          sqliteDb.run(`
-            CREATE TABLE IF NOT EXISTS quiz_submissions (
-              id INTEGER PRIMARY KEY,
-              created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-              source TEXT DEFAULT 'kexchoklad',
-              name TEXT NOT NULL,
-              phone TEXT NOT NULL,
-              email TEXT NOT NULL,
-              score INTEGER NOT NULL,
-              total_questions INTEGER NOT NULL DEFAULT 8,
-              tiebreaker_guess INTEGER NOT NULL,
-              prize_choice TEXT NOT NULL,
-              want_info INTEGER DEFAULT 0,
-              want_member INTEGER DEFAULT 0,
-              answers_json TEXT,
-              ip_address TEXT,
-              user_agent TEXT
-            )
-          `, (e2) => {
-            if (e2) return reject(e2);
-            dbType = 'sqlite';
-            resolve();
-          });
-        } else {
+        if (err) return reject(err);
+
+        // Migration för SQLite om kolumnen city saknas
+        sqliteDb.run(`ALTER TABLE quiz_submissions ADD COLUMN city TEXT DEFAULT ''`, () => {
           dbType = 'sqlite';
           resolve();
-        }
+        });
       });
     });
   });
@@ -141,6 +129,7 @@ async function saveSubmission(data) {
   const {
     source = 'kexchoklad',
     name,
+    city = '',
     phone,
     email,
     score,
@@ -160,22 +149,22 @@ async function saveSubmission(data) {
   if (dbType === 'mysql') {
     const query = `
       INSERT INTO quiz_submissions 
-      (source, name, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json, ip_address, user_agent)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json, ip_address, user_agent)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const [result] = await mysqlPool.execute(query, [
-      source, name, phone, email, score, totalQuestions, tiebreakerGuess, prizeChoice, infoVal, memberVal, answersJson, ipAddress, userAgent
+      source, name, city, phone, email, score, totalQuestions, tiebreakerGuess, prizeChoice, infoVal, memberVal, answersJson, ipAddress, userAgent
     ]);
     return result.insertId;
   } else {
     return new Promise((resolve, reject) => {
       const query = `
         INSERT INTO quiz_submissions 
-        (source, name, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json, ip_address, user_agent)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json, ip_address, user_agent)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
       sqliteDb.run(query, [
-        source, name, phone, email, score, totalQuestions, tiebreakerGuess, prizeChoice, infoVal, memberVal, answersJson, ipAddress, userAgent
+        source, name, city, phone, email, score, totalQuestions, tiebreakerGuess, prizeChoice, infoVal, memberVal, answersJson, ipAddress, userAgent
       ], function(err) {
         if (err) return reject(err);
         resolve(this.lastID);
@@ -188,7 +177,7 @@ async function saveSubmission(data) {
  * Hämtar alla bidrag med filter och sortering
  */
 async function getSubmissions(filter = 'all', search = '', sortBy = 'created_at', sortDir = 'DESC') {
-  const validSortCols = ['created_at', 'score', 'tiebreaker_guess', 'name'];
+  const validSortCols = ['created_at', 'score', 'tiebreaker_guess', 'name', 'city'];
   const sortCol = validSortCols.includes(sortBy) ? sortBy : 'created_at';
   const order = sortDir.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
 
@@ -207,8 +196,8 @@ async function getSubmissions(filter = 'all', search = '', sortBy = 'created_at'
 
   if (search && search.trim()) {
     const s = `%${search.trim()}%`;
-    whereClauses.push('(name LIKE ? OR email LIKE ? OR phone LIKE ?)');
-    params.push(s, s, s);
+    whereClauses.push('(name LIKE ? OR city LIKE ? OR email LIKE ? OR phone LIKE ?)');
+    params.push(s, s, s, s);
   }
 
   const whereSql = whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
@@ -262,12 +251,12 @@ async function getStats() {
       `, (err, row) => {
         if (err) return reject(err);
         resolve({
-          total: row.total || 0,
-          avgScore: row.avgScore ? parseFloat(row.avgScore).toFixed(1) : '0',
-          wantMember: row.wantMember || 0,
-          wantInfo: row.wantInfo || 0,
-          fromKexchoklad: row.fromKexchoklad || 0,
-          perfectScores: row.perfectScores || 0,
+          total: row ? (row.total || 0) : 0,
+          avgScore: (row && row.avgScore) ? parseFloat(row.avgScore).toFixed(1) : '0',
+          wantMember: row ? (row.wantMember || 0) : 0,
+          wantInfo: row ? (row.wantInfo || 0) : 0,
+          fromKexchoklad: row ? (row.fromKexchoklad || 0) : 0,
+          perfectScores: row ? (row.perfectScores || 0) : 0,
           dbType
         });
       });

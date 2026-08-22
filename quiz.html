@@ -747,6 +747,11 @@
             </div>
 
             <div class="form-group">
+              <label for="input-city" class="form-label">Hemort / Område *</label>
+              <input type="text" id="input-city" class="form-input" placeholder="T.ex. Älvängen, Nödinge, Surte, Skepplanda..." required>
+            </div>
+
+            <div class="form-group">
               <label for="input-phone" class="form-label">Mobilnummer *</label>
               <input type="tel" id="input-phone" class="form-input" placeholder="070-123 45 67" required>
             </div>
@@ -867,7 +872,7 @@
         <p>Vinsten kan inte bytas mot kontanter eller överlåtas till tredje part.</p>
 
         <h4>5. Vinnarurval & Presentation</h4>
-        <p>Den deltagare med flest rätt som gissat närmast det totala antalet deltagare vinner. Vinnaren utses och publiceras med förnamn på Moderaterna i Ales Facebook-sida senast den 15 september 2026 och kontaktas personligen via telefon/e-post.</p>
+        <p>Den deltagare med flest rätt som gissat närmast det totala antalet deltagare vinner. Vinnaren utses och publiceras med förnamn och ort på Moderaterna i Ales Facebook-sida senast den 15 september 2026 och kontaktas personligen via telefon/e-post.</p>
 
         <h4>6. Personuppgifter (GDPR)</h4>
         <p>Dina uppgifter sparas uteslutande för tävlingsadministration och kontakt av vinnaren, samt för lokal information/medlemskap om du uttryckligen kryssat i detta. Uppgifterna säljs eller lämnas aldrig vidare till tredje part.</p>
@@ -1020,14 +1025,15 @@
       errBox.style.display = 'none';
 
       const name = document.getElementById('input-name').value.trim();
+      const city = document.getElementById('input-city').value.trim();
       const phone = document.getElementById('input-phone').value.trim();
       const email = document.getElementById('input-email').value.trim();
       const prizeChoice = document.querySelector('input[name="prize_choice"]:checked')?.value || '500 kr presentkort i Ale';
       const wantInfo = document.getElementById('check-info').checked;
       const wantMember = document.getElementById('check-member').checked;
 
-      if (!name || !phone || !email) {
-        errBox.textContent = 'Vänligen fyll i alla obligatoriska fält.';
+      if (!name || !city || !phone || !email) {
+        errBox.textContent = 'Vänligen fyll i alla obligatoriska fält inklusive hemort.';
         errBox.style.display = 'block';
         return;
       }
@@ -1040,6 +1046,7 @@
         const payload = {
           source: trafficSource,
           name,
+          city,
           phone,
           email,
           answers: userAnswers,
