@@ -776,10 +776,10 @@
           <div class="prize-accordion">
             <button type="button" id="btn-toggle-prizes" class="prize-accordion-btn">
               <span id="prize-toggle-text">Klicka för att se vinsterna</span>
-              <span id="prize-toggle-icon" class="toggle-icon">+</span>
+              <span id="prize-toggle-icon" class="toggle-icon">−</span>
             </button>
             
-            <div id="prize-content" class="prize-accordion-content" style="display: none;">
+            <div id="prize-content" class="prize-accordion-content" style="display: block;">
               <div class="prize-grid-gemini">
                 
                 <!-- Prize 1: Golden Gift Card -->
@@ -1189,7 +1189,7 @@
     
     if (btnTogglePrizes) {
       btnTogglePrizes.addEventListener('click', () => {
-        const isHidden = prizeContent.style.display === 'none';
+        const isHidden = window.getComputedStyle(prizeContent).display === 'none';
         prizeContent.style.display = isHidden ? 'block' : 'none';
         prizeToggleIcon.textContent = isHidden ? '−' : '+';
       });
