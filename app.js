@@ -1,4 +1,5 @@
 /**
  * Phusion Passenger entrypoint for cPanel / CloudLinux
  */
-require('./server.js');
+const app = require('./server');
+module.exports = app;

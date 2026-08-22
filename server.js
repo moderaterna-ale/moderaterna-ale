@@ -270,19 +270,15 @@ app.delete('/api/quiz/admin/submission/:id', authenticateAdmin, async (req, res)
 });
 
 // Starta servern
-async function startServer() {
-  try {
-    await initDatabase();
-    app.listen(PORT, () => {
-      console.log(`🚀 Ale Quiz Server körs på port ${PORT}`);
-      console.log(`👉 Quiz URL: /quiz`);
-      console.log(`👉 Admin URL: /quiz-admin`);
-    });
-  } catch (err) {
-    console.error('❌ Misslyckades med att starta servern:', err);
-  }
-}
+const server = app.listen(PORT, () => {
+  console.log(`🚀 Ale Quiz Server körs på port ${PORT}`);
+  console.log(`👉 Quiz URL: /quiz`);
+  console.log(`👉 Admin URL: /quiz-admin`);
+});
 
-startServer();
+// Initiera databasanslutning
+initDatabase().catch(err => {
+  console.error('❌ Databasinitieringsfel:', err);
+});
 
 module.exports = app;
