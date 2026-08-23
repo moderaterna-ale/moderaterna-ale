@@ -676,6 +676,20 @@ body {
   flex-grow: 1;
 }
 
+.topic-body p {
+  margin-bottom: 0.85rem;
+  line-height: 1.65;
+}
+
+.topic-body p:last-child {
+  margin-bottom: 0;
+}
+
+.topic-body strong {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
 /* Feature Navigation Cards on Home Page */
 .nav-card-grid {
   display: grid;
