@@ -732,9 +732,18 @@ body {
 .nav-card-text {
   font-size: 0.95rem;
   color: var(--text-body);
-  line-height: 1.6;
+  line-height: 1.62;
+  margin-bottom: 0.85rem;
+}
+
+.nav-card-text:last-of-type {
   margin-bottom: 1.5rem;
   flex-grow: 1;
+}
+
+.nav-card-text strong {
+  color: var(--primary-dark);
+  font-weight: 700;
 }
 
 .nav-card-arrow {
