@@ -437,6 +437,128 @@ body {
   color: var(--text-muted);
 }
 
+/* Vision Article Modern Editorial Layout */
+.article-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 114, 206, 0.1);
+  color: var(--primary-light);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.85rem;
+}
+
+.article-main-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.article-lead {
+  font-size: 1.12rem;
+  color: var(--text-dark);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.vision-pillars-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.25rem 0 1.75rem 0;
+}
+
+.vision-pillar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0f7ff;
+  border: 1px solid #bae6fd;
+  color: #002855;
+  padding: 0.5rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.vision-pillar-item svg {
+  color: var(--primary-light);
+  flex-shrink: 0;
+}
+
+.article-section-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.vision-pullquote {
+  background: #f8fafc;
+  border-left: 4px solid var(--primary-light);
+  border-radius: 0 1rem 1rem 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.pullquote-icon {
+  color: var(--primary-light);
+  opacity: 0.7;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.pullquote-quote {
+  font-size: 1.08rem;
+  color: var(--primary-dark);
+  line-height: 1.55;
+  margin: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .article-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .article-main-title {
+    font-size: 1.65rem;
+  }
+  .article-lead {
+    font-size: 1.02rem;
+  }
+  .vision-pillars-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .vision-pillar-item {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .vision-pullquote {
+    padding: 1.1rem 1rem;
+    gap: 0.75rem;
+  }
+  .pullquote-quote {
+    font-size: 0.98rem;
+  }
+}
+
 .author-quote {
   margin-top: 2rem;
   padding-top: 1.5rem;
