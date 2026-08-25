@@ -39,13 +39,13 @@ $questions = [
     [
         'id' => 2,
         'category' => 'Allmän',
-        'question' => 'Göta älv rinner genom hela vår långsträckta kommun. Ungefär hur lång är älvsträckan som går genom Ale kommun?',
+        'question' => 'Vilket unikt föremål hittades i Ale 1933?',
         'options' => [
-            ['id' => 'opt_1', 'text' => 'Ca 3 mil', 'isCorrect' => true],
-            ['id' => 'opt_2', 'text' => 'Ca 1 mil', 'isCorrect' => false],
-            ['id' => 'opt_3', 'text' => 'Oändlig när man paddlar kanot motströms', 'isCorrect' => false]
+            ['id' => 'opt_1', 'text' => 'Vikingaskepp', 'isCorrect' => true],
+            ['id' => 'opt_2', 'text' => 'UFO', 'isCorrect' => false],
+            ['id' => 'opt_3', 'text' => 'Kista med guld', 'isCorrect' => false]
         ],
-        'explanation' => 'Göta älv sträcker sig ca 3 mil längs med Ale kommun – en fantastisk resurs för natur, friluftsliv och rekreation!'
+        'explanation' => 'Äskekärrskeppet, Sveriges enda bevarade vikingaskepp (knarr), grävdes fram i Äskekärr i Ale 1933!'
     ],
     [
         'id' => 3,
@@ -60,14 +60,14 @@ $questions = [
     ],
     [
         'id' => 4,
-        'category' => 'Allmän',
-        'question' => 'I Ale finns världens bästa...?',
+        'category' => 'Profil',
+        'question' => 'Psykisk ohälsa är ett stort problem, Moderaternas lösning är?',
         'options' => [
-            ['id' => 'opt_1', 'text' => 'Discgolfbana', 'isCorrect' => true],
-            ['id' => 'opt_2', 'text' => 'Ljusa öl', 'isCorrect' => false],
-            ['id' => 'opt_3', 'text' => 'Pizza', 'isCorrect' => false]
+            ['id' => 'opt_1', 'text' => 'Rätt stöd när du behöver det', 'isCorrect' => true],
+            ['id' => 'opt_2', 'text' => 'Fler blanketter att fylla i', 'isCorrect' => false],
+            ['id' => 'opt_3', 'text' => 'Saft och bulle', 'isCorrect' => false]
         ],
-        'explanation' => 'Ale Disc Golf Center i Uspastorp är internationellt erkänd och rankad som en av världens absolut främsta discgolfbanor!'
+        'explanation' => 'Moderaterna vill att stöd och insatser ska ges tidigt, utan krångel och med fokus på individens behov när man behöver det.'
     ],
     [
         'id' => 5,
@@ -83,7 +83,7 @@ $questions = [
     [
         'id' => 6,
         'category' => 'Profil',
-        'question' => 'Vad anser Moderaterna i Ale om planerna på att dra en ny genomfartsled/bilväg från Lövgärdet ner genom Surte?',
+        'question' => 'Vad tycker Moderaterna om en bilväg mellan Lövgärdet och Surte?',
         'options' => [
             ['id' => 'opt_1', 'text' => 'Vi säger bestämt NEJ – vi vill bevara Surtes unika karaktär, lugn och trygghet!', 'isCorrect' => true],
             ['id' => 'opt_2', 'text' => 'Vi tycker det låter som ett fantastiskt rallyspår', 'isCorrect' => false],
@@ -94,20 +94,20 @@ $questions = [
     [
         'id' => 7,
         'category' => 'Profil',
-        'question' => 'Skolan är en av Moderaternas absoluta hjärtefrågor. Vad kallas vår stora satsning för att alla elever ska nå sin fulla potential?',
+        'question' => 'Hur vill Moderaterna utveckla skolan i Ale?',
         'options' => [
-            ['id' => 'opt_1', 'text' => 'Kunskapslyftet och Utvecklingsspåret', 'isCorrect' => true],
-            ['id' => 'opt_2', 'text' => 'Läxfri termin och sovmorgon till kl 11', 'isCorrect' => false],
-            ['id' => 'opt_3', 'text' => 'Digital rast hela dagen', 'isCorrect' => false]
+            ['id' => 'opt_1', 'text' => 'Skolfrukost, kött varje dag, fler vuxna', 'isCorrect' => true],
+            ['id' => 'opt_2', 'text' => 'Inga lov', 'isCorrect' => false],
+            ['id' => 'opt_3', 'text' => '100 elever i varje klass', 'isCorrect' => false]
         ],
-        'explanation' => 'Genom Kunskapslyftet och Utvecklingsspåret satsar vi på tidiga insatser, studiero och baskunskaper så att varje barn lyckas i skolan!'
+        'explanation' => 'Genom satsningar på skolfrukost, bra näringsrik mat med valmöjligheter och fler vuxna i skolan skapar vi trygghet och studiero så att varje elev kan nå sin fulla potential!'
     ],
     [
         'id' => 8,
         'category' => 'Profil',
         'question' => 'Ale har något som många kommuner avundas – milslång älvkontakt. Vad vill Moderaterna göra med området längs Göta älv?',
         'options' => [
-            ['id' => 'opt_1', 'text' => 'Skapa liv, rörelse, bryggor, mötesplatser och tillgängliggöra älven för rekreation', 'isCorrect' => true],
+            ['id' => 'opt_1', 'text' => 'Skapa liv, rörelse och bygg bryggor', 'isCorrect' => true],
             ['id' => 'opt_2', 'text' => 'Bygga en fem meter hög betongmur', 'isCorrect' => false],
             ['id' => 'opt_3', 'text' => 'Förbjuda all form av vistelse vid vattnet', 'isCorrect' => false]
         ],
