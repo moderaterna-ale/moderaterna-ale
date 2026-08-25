@@ -1,4 +1,4 @@
-﻿# Moderaterna i Ale (ale.nu)
+﻿﻿# Moderaterna i Ale (ale.nu)
 
 > Officiell politisk plattform, vision, valsedlar och samtliga publicerade insändare och debattartiklar för Moderaterna i Ale kommun under valet 2026.
 
@@ -137,6 +137,12 @@ Här är en komplett förteckning över samtliga 20 insändare och debattartikla
 - **Typ/Publicering:** Debatt i Alekuriren
 - **Kärnbudskap:** "Moderaterna värnar ortsunik karaktär och historia. En bilväg till Lövgärdet hör inte hemma i Moderaternas Surte."
 - **Sammanfattning:** Surte. En ortskaraktär som har vuxit fram under lång tid. Här njuter alla åldrar av natur, gemenskap och trygghet. Livsmiljö som är viktig att bygga vidare på och utveckla. Moderaterna värnar och vill behålla ortsunik karaktär och historia men samtidigt utveckla där så är möjligt, lämpligt och genomförbart. En bilväg till Lövgärdet hör inte hemma i Moderaternas Surte.
+
+### [Vecka 34: Mannen bakom masken](insandare.html#v34-masken)
+- **Författare:** Henrik Fogelklou (M) (Kommunstyrelsens ordförande i Ale)
+- **Typ/Publicering:** Publicerad i Alekuriren
+- **Kärnbudskap:** "Politiker är vanliga människor som valt att ägna sin tid åt att förbättra och utveckla samhället. Allt det vi har samlat på oss genom livet tar vi med oss in i beslutsrummen."
+- **Sammanfattning:** Henrik Fogelklou ger en personlig inblick i vem han är bakom valaffischerna och den politiska rollen. Med erfarenheter som flerbarnsförälder, farfar, föreningsledare och chef i näringslivet förklarar han hur hans livsresor formar hans engagemang för skola, trygghet, föreningsliv och att leda Ale som en kommun i toppklass.
 
 ### [Vecka 34: Svar på S och C om vildsvin](insandare.html#v34-vildsvin)
 - **Författare:** Eddie Glans (M) (Ordförande i Samhällsbyggnadsnämnden)
