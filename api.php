@@ -107,7 +107,7 @@ $questions = [
         'category' => 'Profil',
         'question' => 'Ale har något som många kommuner avundas – milslång älvkontakt. Vad vill Moderaterna göra med området längs Göta älv?',
         'options' => [
-            ['id' => 'opt_1', 'text' => 'Skapa liv, rörelse och bygg bryggor', 'isCorrect' => true],
+            ['id' => 'opt_1', 'text' => 'Skapa liv, rörelse och aktivitet', 'isCorrect' => true],
             ['id' => 'opt_2', 'text' => 'Bygga en fem meter hög betongmur', 'isCorrect' => false],
             ['id' => 'opt_3', 'text' => 'Förbjuda all form av vistelse vid vattnet', 'isCorrect' => false]
         ],
