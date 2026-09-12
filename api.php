@@ -232,7 +232,7 @@ function jsonOut($data, $code = 200) {
 }
 
 // 1. GET /api/quiz/questions
-if ($route === 'questions' && $method === 'GET') {
+if (($route === 'questions' || $route === 'quiz/questions') && $method === 'GET') {
     $q1 = $questions[0];
     $rest = array_slice($questions, 1);
     shuffle($rest);
@@ -258,7 +258,7 @@ if ($route === 'questions' && $method === 'GET') {
 }
 
 // 2. POST /api/quiz/submit
-if ($route === 'submit' && $method === 'POST') {
+if (($route === 'submit' || $route === 'quiz/submit') && $method === 'POST') {
     $raw = file_get_contents('php://input');
     $body = json_decode($raw, true) ?? $_POST;
 
@@ -334,7 +334,7 @@ if ($route === 'submit' && $method === 'POST') {
 }
 
 // 3. POST /api/quiz/admin/login
-if ($route === 'admin/login' && $method === 'POST') {
+if (($route === 'admin/login' || $route === 'quiz/admin/login') && $method === 'POST') {
     $raw = file_get_contents('php://input');
     $body = json_decode($raw, true) ?? $_POST;
     $pwd = $body['password'] ?? '';
@@ -360,13 +360,13 @@ if ($route === 'admin/login' && $method === 'POST') {
 }
 
 // 4. POST /api/quiz/admin/logout
-if ($route === 'admin/logout' && $method === 'POST') {
+if (($route === 'admin/logout' || $route === 'quiz/admin/logout') && $method === 'POST') {
     setcookie('quiz_admin_token', '', time() - 3600, '/');
     jsonOut(['success' => true]);
 }
 
 // 5. GET /api/quiz/admin/submissions
-if ($route === 'admin/submissions' && $method === 'GET') {
+if (($route === 'admin/submissions' || $route === 'quiz/admin/submissions') && $method === 'GET') {
     if (!checkAuth()) jsonOut(['error' => 'Obehörig åtkomst.'], 401);
 
     $pdo = getDB();
@@ -452,7 +452,7 @@ if ($route === 'admin/submissions' && $method === 'GET') {
 }
 
 // 6. GET /api/quiz/admin/export (CSV)
-if ($route === 'admin/export' && $method === 'GET') {
+if (($route === 'admin/export' || $route === 'quiz/admin/export') && $method === 'GET') {
     if (!checkAuth()) jsonOut(['error' => 'Obehörig åtkomst.'], 401);
 
     $pdo = getDB();
@@ -477,7 +477,7 @@ if ($route === 'admin/export' && $method === 'GET') {
 }
 
 // 7. DELETE /api/quiz/admin/submission/:id
-if (preg_match('#^admin/submission/(\d+)$#', $route, $m) && $method === 'DELETE') {
+if (preg_match('#^(?:quiz/)?admin/submission/(\d+)$#', $route, $m) && $method === 'DELETE') {
     if (!checkAuth()) jsonOut(['error' => 'Obehörig åtkomst.'], 401);
 
     $id = intval($m[1]);

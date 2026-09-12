@@ -636,16 +636,58 @@
       return localStorage.getItem('quiz_admin_token') || '';
     }
 
+    // Helper to fetch from API with automatic fallback between rewrite URL and direct script query URL
+    async function apiFetch(endpointPath, options = {}) {
+      const token = getToken();
+      const headers = Object.assign({
+        'Content-Type': 'application/json'
+      }, options.headers || {});
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const cleanEndpoint = endpointPath.replace(/^\/?(api\/quiz\/|api\/)?/, '');
+      const sep = cleanEndpoint.includes('?') ? '&' : '?';
+      const tokenParam = token ? `${sep}token=${encodeURIComponent(token)}` : '';
+
+      // Try pretty URL first (/api/quiz/...)
+      const url1 = `/api/quiz/${cleanEndpoint}${tokenParam}`;
+      try {
+        const res = await fetch(url1, Object.assign({}, options, { headers, credentials: 'same-origin' }));
+        if (res.status === 404 || res.status === 502 || res.status === 503) {
+          throw new Error('Fallback to direct script');
+        }
+        return res;
+      } catch (err) {
+        // Fallback to api.php?route=...
+        const sep2 = cleanEndpoint.includes('?') ? '&' : '&';
+        const url2 = `/api.php?route=${cleanEndpoint}${token ? '&token=' + encodeURIComponent(token) : ''}`;
+        return await fetch(url2, Object.assign({}, options, { headers, credentials: 'same-origin' }));
+      }
+    }
+
     // Check login state on load
     document.addEventListener('DOMContentLoaded', () => {
       if (getToken()) {
+        showDashboard();
         loadDashboardData();
       } else {
-        document.getElementById('view-login').style.display = 'block';
-        document.getElementById('view-dashboard').style.display = 'none';
-        document.getElementById('btn-logout').style.display = 'none';
+        showLogin();
       }
     });
+
+    function showDashboard() {
+      document.getElementById('view-login').style.display = 'none';
+      document.getElementById('view-dashboard').style.display = 'block';
+      document.getElementById('btn-logout').style.display = 'inline-flex';
+    }
+
+    function showLogin() {
+      document.getElementById('view-login').style.display = 'block';
+      document.getElementById('view-dashboard').style.display = 'none';
+      document.getElementById('btn-logout').style.display = 'none';
+    }
 
     // Login Form
     document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
@@ -658,16 +700,15 @@
       submitBtn.innerText = 'Loggar in...';
 
       try {
-        const res = await fetch('/api/quiz/admin/login', {
+        const res = await apiFetch('admin/login', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: pwd }),
-          credentials: 'same-origin'
+          body: JSON.stringify({ password: pwd })
         });
 
         const data = await res.json();
         if (data.success && data.token) {
           localStorage.setItem('quiz_admin_token', data.token);
+          showDashboard();
           await loadDashboardData();
         } else {
           errBox.textContent = data.error || 'Fel lösenord.';
@@ -675,7 +716,7 @@
         }
       } catch (err) {
         console.error('Login error:', err);
-        errBox.textContent = 'Ett nätverksfel uppstod vid inloggning: ' + (err.message || 'Kunde inte nå servern.');
+        errBox.textContent = 'Ett nätverksfel uppstod vid inloggning: ' + (err.message || 'Kunde inte ansluta.');
         errBox.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
@@ -687,11 +728,9 @@
     document.getElementById('btn-logout').addEventListener('click', async () => {
       localStorage.removeItem('quiz_admin_token');
       try {
-        await fetch('/api/quiz/admin/logout', { method: 'POST', credentials: 'same-origin' });
+        await apiFetch('admin/logout', { method: 'POST' });
       } catch (e) {}
-      document.getElementById('view-login').style.display = 'block';
-      document.getElementById('view-dashboard').style.display = 'none';
-      document.getElementById('btn-logout').style.display = 'none';
+      showLogin();
       document.getElementById('login-password').value = '';
     });
 
@@ -745,31 +784,22 @@
     async function loadDashboardData() {
       const token = getToken();
       if (!token) {
-        document.getElementById('view-login').style.display = 'block';
-        document.getElementById('view-dashboard').style.display = 'none';
-        document.getElementById('btn-logout').style.display = 'none';
+        showLogin();
         return;
       }
 
       // Update export button href with token query param
-      document.getElementById('btn-export-csv').href = `/api/quiz/admin/export?token=${encodeURIComponent(token)}`;
+      document.getElementById('btn-export-csv').href = `/api.php?route=admin/export&token=${encodeURIComponent(token)}`;
 
       const search = document.getElementById('table-search').value;
-      const url = `/api/quiz/admin/submissions?filter=${encodeURIComponent(currentFilter)}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}&token=${encodeURIComponent(token)}`;
+      const endpoint = `admin/submissions?filter=${encodeURIComponent(currentFilter)}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}`;
 
       try {
-        const res = await fetch(url, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          },
-          credentials: 'same-origin'
-        });
+        const res = await apiFetch(endpoint, { method: 'GET' });
 
         if (res.status === 401) {
           localStorage.removeItem('quiz_admin_token');
-          document.getElementById('view-login').style.display = 'block';
-          document.getElementById('view-dashboard').style.display = 'none';
-          document.getElementById('btn-logout').style.display = 'none';
+          showLogin();
           const errBox = document.getElementById('login-error');
           errBox.textContent = 'Inloggningssessionen har löpt ut eller är ogiltig. Logga in igen.';
           errBox.style.display = 'block';
@@ -778,10 +808,7 @@
 
         const data = await res.json();
         if (data.success) {
-          document.getElementById('view-login').style.display = 'none';
-          document.getElementById('view-dashboard').style.display = 'block';
-          document.getElementById('btn-logout').style.display = 'block';
-
+          showDashboard();
           latestStats = data.stats;
           renderStats(data.stats);
           renderDynamicSources(data.stats ? data.stats.sources : []);
@@ -950,12 +977,9 @@
     // Delete Submission
     async function handleDelete(id) {
       if (!confirm('Är du säker på att du vill radera detta tävlingsbidrag?')) return;
-      const token = getToken();
       try {
-        const res = await fetch(`/api/quiz/admin/submission/${id}?token=${encodeURIComponent(token)}`, {
-          method: 'DELETE',
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-          credentials: 'same-origin'
+        const res = await apiFetch(`admin/submission/${id}`, {
+          method: 'DELETE'
         });
         const data = await res.json();
         if (data.success) {
