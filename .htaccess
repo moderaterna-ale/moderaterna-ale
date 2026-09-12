@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# Pass Authorization header to PHP in FastCGI/LiteSpeed
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
 # Block sensitive files
 <FilesMatch "^\.env|package\.json|package-lock\.json|\.db$">
     Require all denied

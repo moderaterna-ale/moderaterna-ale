@@ -165,17 +165,28 @@ function getDB() {
     }
 }
 
-// Token-validering för admin
+// Token-validering för admin (Stödjer Headers, Query Parameter och Cookies)
 function checkAuth() {
     global $secretKey;
-    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-    $cookieToken = $_COOKIE['quiz_admin_token'] ?? '';
-    $token = '';
+    $token = $_GET['token'] ?? $_POST['token'] ?? '';
 
-    if (preg_match('/Bearer\s+(.*)$/i', $authHeader, $m)) {
-        $token = $m[1];
-    } elseif ($cookieToken) {
-        $token = $cookieToken;
+    if (!$token) {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+        if (!$authHeader && function_exists('apache_request_headers')) {
+            $headers = apache_request_headers();
+            $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+        }
+        if (!$authHeader && function_exists('getallheaders')) {
+            $headers = getallheaders();
+            $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+        }
+        if (preg_match('/Bearer\s+(.*)$/i', $authHeader, $m)) {
+            $token = trim($m[1]);
+        }
+    }
+
+    if (!$token) {
+        $token = $_COOKIE['quiz_admin_token'] ?? '';
     }
 
     if (!$token) return false;
@@ -201,7 +212,13 @@ $route = $_GET['route'] ?? '';
 if (!$route) {
     if (strpos($uri, '/api/quiz/') !== false) {
         $route = substr($uri, strpos($uri, '/api/quiz/') + 10);
+    } elseif (strpos($uri, '/api/') !== false) {
+        $route = substr($uri, strpos($uri, '/api/') + 5);
     }
+}
+// Strip optional prefix 'quiz/'
+if (strpos($route, 'quiz/') === 0) {
+    $route = substr($route, 5);
 }
 $route = trim($route, '/');
 $method = $_SERVER['REQUEST_METHOD'];

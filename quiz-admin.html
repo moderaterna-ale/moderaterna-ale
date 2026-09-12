@@ -47,14 +47,14 @@
 
     /* Login Card */
     .login-container {
-      max-width: 420px;
+      max-width: 440px;
       margin: 4rem auto 0;
     }
 
     .admin-card {
       background: var(--admin-card);
       border-radius: 1rem;
-      padding: 1.75rem;
+      padding: 2rem;
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
       margin-bottom: 1.5rem;
@@ -482,9 +482,9 @@
 
         <form id="admin-login-form">
           <div style="margin-bottom: 1.25rem;">
-            <input type="password" id="login-password" class="search-input" style="width: 100%; padding: 0.75rem 1rem;" placeholder="Administratörslösenord" required autofocus>
+            <input type="password" id="login-password" class="search-input" style="width: 100%; padding: 0.75rem 1rem; box-sizing: border-box;" placeholder="Administratörslösenord" required autofocus>
           </div>
-          <div id="login-error" style="display: none; color: #ef4444; font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem;"></div>
+          <div id="login-error" style="display: none; background: #fee2e2; border: 1px solid #f87171; color: #b91c1c; padding: 0.65rem 0.85rem; border-radius: 0.5rem; font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem;"></div>
           <button type="submit" id="btn-submit-login" class="btn-admin-action" style="width: 100%; justify-content: center; padding: 0.75rem;">
             <span>Logga in</span>
           </button>
@@ -505,7 +505,7 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
             <span>Uppdatera</span>
           </button>
-          <a id="btn-export-csv" href="/api/quiz/admin/export" class="btn-admin-action">
+          <a id="btn-export-csv" href="/api/quiz/admin/export" class="btn-admin-action" target="_blank">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
             <span>Exportera till Excel (CSV)</span>
           </a>
@@ -632,15 +632,25 @@
     let searchTimeout = null;
     let latestStats = null;
 
+    function getToken() {
+      return localStorage.getItem('quiz_admin_token') || '';
+    }
+
     // Check login state on load
     document.addEventListener('DOMContentLoaded', () => {
-      loadDashboardData();
+      if (getToken()) {
+        loadDashboardData();
+      } else {
+        document.getElementById('view-login').style.display = 'block';
+        document.getElementById('view-dashboard').style.display = 'none';
+        document.getElementById('btn-logout').style.display = 'none';
+      }
     });
 
     // Login Form
     document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const pwd = document.getElementById('login-password').value;
+      const pwd = document.getElementById('login-password').value.trim();
       const errBox = document.getElementById('login-error');
       const submitBtn = document.getElementById('btn-submit-login');
       errBox.style.display = 'none';
@@ -651,21 +661,21 @@
         const res = await fetch('/api/quiz/admin/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: pwd })
+          body: JSON.stringify({ password: pwd }),
+          credentials: 'same-origin'
         });
 
         const data = await res.json();
-        if (data.success) {
-          if (data.token) {
-            localStorage.setItem('quiz_admin_token', data.token);
-          }
+        if (data.success && data.token) {
+          localStorage.setItem('quiz_admin_token', data.token);
           await loadDashboardData();
         } else {
           errBox.textContent = data.error || 'Fel lösenord.';
           errBox.style.display = 'block';
         }
       } catch (err) {
-        errBox.textContent = 'Ett fel uppstod vid inloggning.';
+        console.error('Login error:', err);
+        errBox.textContent = 'Ett nätverksfel uppstod vid inloggning: ' + (err.message || 'Kunde inte nå servern.');
         errBox.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
@@ -677,7 +687,7 @@
     document.getElementById('btn-logout').addEventListener('click', async () => {
       localStorage.removeItem('quiz_admin_token');
       try {
-        await fetch('/api/quiz/admin/logout', { method: 'POST' });
+        await fetch('/api/quiz/admin/logout', { method: 'POST', credentials: 'same-origin' });
       } catch (e) {}
       document.getElementById('view-login').style.display = 'block';
       document.getElementById('view-dashboard').style.display = 'none';
@@ -733,17 +743,36 @@
 
     // Load Data
     async function loadDashboardData() {
+      const token = getToken();
+      if (!token) {
+        document.getElementById('view-login').style.display = 'block';
+        document.getElementById('view-dashboard').style.display = 'none';
+        document.getElementById('btn-logout').style.display = 'none';
+        return;
+      }
+
+      // Update export button href with token query param
+      document.getElementById('btn-export-csv').href = `/api/quiz/admin/export?token=${encodeURIComponent(token)}`;
+
       const search = document.getElementById('table-search').value;
-      const url = `/api/quiz/admin/submissions?filter=${encodeURIComponent(currentFilter)}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}`;
-      const token = localStorage.getItem('quiz_admin_token');
-      const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+      const url = `/api/quiz/admin/submissions?filter=${encodeURIComponent(currentFilter)}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}&token=${encodeURIComponent(token)}`;
 
       try {
-        const res = await fetch(url, { headers });
+        const res = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          credentials: 'same-origin'
+        });
+
         if (res.status === 401) {
+          localStorage.removeItem('quiz_admin_token');
           document.getElementById('view-login').style.display = 'block';
           document.getElementById('view-dashboard').style.display = 'none';
           document.getElementById('btn-logout').style.display = 'none';
+          const errBox = document.getElementById('login-error');
+          errBox.textContent = 'Inloggningssessionen har löpt ut eller är ogiltig. Logga in igen.';
+          errBox.style.display = 'block';
           return;
         }
 
@@ -757,6 +786,8 @@
           renderStats(data.stats);
           renderDynamicSources(data.stats ? data.stats.sources : []);
           renderTable(data.submissions);
+        } else {
+          alert('Kunde inte läsa in data: ' + (data.error || 'Okänt fel'));
         }
       } catch (err) {
         console.error('Error loading data:', err);
@@ -919,8 +950,13 @@
     // Delete Submission
     async function handleDelete(id) {
       if (!confirm('Är du säker på att du vill radera detta tävlingsbidrag?')) return;
+      const token = getToken();
       try {
-        const res = await fetch(`/api/quiz/admin/submission/${id}`, { method: 'DELETE' });
+        const res = await fetch(`/api/quiz/admin/submission/${id}?token=${encodeURIComponent(token)}`, {
+          method: 'DELETE',
+          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+          credentials: 'same-origin'
+        });
         const data = await res.json();
         if (data.success) {
           loadDashboardData();
@@ -928,7 +964,7 @@
           alert(data.error || 'Kunde inte radera.');
         }
       } catch (err) {
-        alert('Ett fel uppstod vid radering.');
+        alert('Ett fel uppstod vid radering: ' + err.message);
       }
     }
 
