@@ -18,6 +18,9 @@
       --admin-success: #10b981;
       --admin-warning: #f59e0b;
       --admin-danger: #ef4444;
+      --gold-bg: #fefce8;
+      --gold-border: #facc15;
+      --gold-text: #854d0e;
     }
 
     body {
@@ -28,12 +31,18 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
+    .site-header .nav-container {
+      max-width: 1800px !important;
+      width: 96% !important;
+      margin: 0 auto;
+    }
+
     .admin-wrapper {
       flex: 1;
-      padding: 1.5rem 1rem 3rem;
-      max-width: 1200px;
+      padding: 1.5rem 1.5rem 3.5rem;
+      max-width: 1800px;
       margin: 0 auto;
-      width: 100%;
+      width: 96%;
     }
 
     /* Login Card */
@@ -74,14 +83,14 @@
     }
 
     .dashboard-title h1 {
-      font-size: 1.6rem;
+      font-size: 1.75rem;
       font-weight: 800;
       color: var(--admin-primary);
       margin: 0 0 0.25rem;
     }
 
     .dashboard-title p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #64748b;
       margin: 0;
     }
@@ -115,7 +124,7 @@
     }
 
     .stat-value {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 800;
       color: var(--admin-primary);
     }
@@ -135,26 +144,47 @@
       color: var(--admin-accent);
     }
 
+    .stat-card.highlight-gold {
+      border-left: 4px solid #f59e0b;
+      background: #fefce8;
+    }
+
+    .stat-card.highlight-gold .stat-value {
+      color: #b45309;
+    }
+
     /* Toolbar & Filters */
     .toolbar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+      background: #ffffff;
+      padding: 1.25rem;
+      border-radius: 0.875rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .toolbar-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 1.25rem;
     }
 
     .filter-tabs {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .filter-btn {
       background: #ffffff;
       border: 1px solid #cbd5e1;
-      padding: 0.45rem 0.9rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 9999px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -162,6 +192,9 @@
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .filter-btn:hover {
@@ -175,12 +208,53 @@
       color: #ffffff;
     }
 
+    /* Special Winner Button */
+    .filter-btn-winners {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      color: #92400e;
+      font-weight: 800;
+    }
+
+    .filter-btn-winners:hover {
+      background: #f59e0b;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+
+    .filter-btn-winners.active {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+      border-color: #92400e !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(180, 83, 9, 0.3);
+    }
+
+    /* Sources sub-row */
+    .sources-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding-top: 0.75rem;
+      border-top: 1px dashed #e2e8f0;
+      font-size: 0.85rem;
+    }
+
+    .sources-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-right: 0.25rem;
+    }
+
     .search-input {
-      padding: 0.5rem 1rem;
+      padding: 0.55rem 1rem;
       border: 1px solid #cbd5e1;
       border-radius: 0.5rem;
       font-size: 0.9rem;
-      width: 240px;
+      width: 280px;
       font-family: inherit;
     }
 
@@ -216,6 +290,28 @@
       border-color: #94a3b8;
     }
 
+    /* Winner Info Banner */
+    .winners-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #fde68a;
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      color: #92400e;
+    }
+
+    .winners-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .winners-banner strong {
+      color: #78350f;
+    }
+
     /* Table */
     .table-responsive {
       overflow-x: auto;
@@ -229,25 +325,27 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
     }
 
     .admin-table th {
       background: #f8fafc;
-      padding: 0.85rem 1rem;
+      padding: 0.9rem 1.1rem;
       font-weight: 700;
       color: #475569;
       border-bottom: 2px solid #e2e8f0;
       white-space: nowrap;
       cursor: pointer;
+      user-select: none;
     }
 
     .admin-table th:hover {
       color: var(--admin-primary);
+      background: #f1f5f9;
     }
 
     .admin-table td {
-      padding: 0.85rem 1rem;
+      padding: 0.9rem 1.1rem;
       border-bottom: 1px solid #f1f5f9;
       color: #1e293b;
       vertical-align: middle;
@@ -257,14 +355,22 @@
       background: #f8fafc;
     }
 
+    .row-winner {
+      background-color: #fffef0 !important;
+    }
+
+    .row-winner:hover td {
+      background-color: #fef9c3 !important;
+    }
+
     /* Badges */
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      padding: 0.2rem 0.55rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 9999px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       white-space: nowrap;
     }
@@ -278,11 +384,13 @@
     .badge-info {
       background: #fef3c7;
       color: #b45309;
+      border: 1px solid #fde68a;
     }
 
     .badge-perfect {
       background: #d1fae5;
       color: #047857;
+      border: 1px solid #a7f3d0;
     }
 
     .badge-score {
@@ -291,12 +399,37 @@
       font-weight: 700;
     }
 
+    .badge-winner-gold {
+      background: linear-gradient(135deg, #fef08a 0%, #facc15 100%);
+      color: #713f12;
+      border: 1px solid #eab308;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+      box-shadow: 0 2px 4px rgba(234, 179, 8, 0.2);
+    }
+
+    .badge-winner-silver {
+      background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+      color: #334155;
+      border: 1px solid #94a3b8;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+    }
+
+    .badge-winner-bronze {
+      background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+      color: #7c2d12;
+      border: 1px solid #fb923c;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+    }
+
     .btn-delete-row {
       background: none;
       border: none;
       color: #94a3b8;
       cursor: pointer;
-      padding: 0.3rem;
+      padding: 0.35rem;
       border-radius: 0.25rem;
       display: inline-flex;
       align-items: center;
@@ -365,7 +498,7 @@
       <div class="dashboard-header">
         <div class="dashboard-title">
           <h1>Tävlingsresultat & Deltagare</h1>
-          <p id="dashboard-subtitle">Översikt över inkomna svar från Kexchoklad-kampanjen och webben.</p>
+          <p id="dashboard-subtitle">Översikt över inkomna svar från Kexchoklad, hemsidan och kampanjer.</p>
         </div>
         <div style="display: flex; gap: 0.6rem;">
           <button id="btn-refresh" class="btn-admin-action btn-admin-outline">
@@ -387,7 +520,15 @@
             <span>Totalt antal svar</span>
           </div>
           <div id="stat-total" class="stat-value">0</div>
-          <div id="stat-source-sub" class="stat-sub">0 från Kexchoklad</div>
+          <div id="stat-source-sub" class="stat-sub">-</div>
+        </div>
+        <div class="stat-card highlight-gold">
+          <div class="stat-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <span>Full pott (8/8)</span>
+          </div>
+          <div id="stat-perfect" class="stat-value">0</div>
+          <div class="stat-sub">Kvalificerade för vinst</div>
         </div>
         <div class="stat-card highlight-member">
           <div class="stat-label">
@@ -407,14 +548,6 @@
         </div>
         <div class="stat-card">
           <div class="stat-label">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-            <span>Full pott (8/8)</span>
-          </div>
-          <div id="stat-perfect" class="stat-value">0</div>
-          <div class="stat-sub">Sanna Ale-experter</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
             <span>Snittpoäng</span>
           </div>
@@ -423,17 +556,41 @@
         </div>
       </div>
 
-      <!-- Toolbar -->
+      <!-- Toolbar & Filters -->
       <div class="toolbar-container">
-        <div class="filter-tabs">
-          <button class="filter-btn active" data-filter="all">Alla (<span id="count-all">0</span>)</button>
-          <button class="filter-btn" data-filter="member">Vill bli medlem (<span id="count-member">0</span>)</button>
-          <button class="filter-btn" data-filter="info">Vill ha info (<span id="count-info">0</span>)</button>
-          <button class="filter-btn" data-filter="perfect">8/8 Rätt (<span id="count-perfect">0</span>)</button>
-          <button class="filter-btn" data-filter="kexchoklad">Kexchoklad (<span id="count-kex">0</span>)</button>
+        <!-- Top Row: Core Filters & Search -->
+        <div class="toolbar-top-row">
+          <div class="filter-tabs" id="primary-filter-tabs">
+            <button class="filter-btn active" data-filter="all">Alla (<span id="count-all">0</span>)</button>
+            <button class="filter-btn filter-btn-winners" data-filter="winners_top3" id="btn-filter-winners">
+              <span>🏆 Topp 3 Vinnare (Utslag)</span>
+            </button>
+            <button class="filter-btn" data-filter="perfect">8/8 Rätt (<span id="count-perfect">0</span>)</button>
+            <button class="filter-btn" data-filter="member">Vill bli medlem (<span id="count-member">0</span>)</button>
+            <button class="filter-btn" data-filter="info">Vill ha info (<span id="count-info">0</span>)</button>
+          </div>
+          <div>
+            <input type="text" id="table-search" class="search-input" placeholder="Sök namn, telefon, e-post, ort...">
+          </div>
         </div>
-        <div>
-          <input type="text" id="table-search" class="search-input" placeholder="Sök namn, telefon, e-post...">
+
+        <!-- Dynamic Sources / Campaigns Filter Sub-Row -->
+        <div class="sources-filter-row" id="sources-filter-container">
+          <span class="sources-label">🏷️ Källor / Ref-taggar:</span>
+          <div id="dynamic-sources-list" style="display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center;">
+            <span style="color: #94a3b8; font-size: 0.8rem;">Laddar källor...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Winner Notification Banner -->
+      <div id="winners-banner" class="winners-banner">
+        <div class="winners-banner-content">
+          <span style="font-size: 1.5rem;">🏆</span>
+          <div>
+            <strong>Topp 3 Vinnare i Ale-quizet:</strong> 
+            Visar de tre deltagare som har <strong>alla rätt (8/8)</strong> och vars gissning i utslagsfrågan ligger <strong>närmast det faktiska antalet deltagare (<span id="winners-target-total">0</span> st)</strong>.
+          </div>
         </div>
       </div>
 
@@ -442,21 +599,21 @@
         <table class="admin-table">
           <thead>
             <tr>
-              <th data-sort="created_at">Tidpunkt ▾</th>
-              <th>Källa</th>
+              <th data-sort="created_at" style="width: 140px;">Tidpunkt ▾</th>
+              <th data-sort="source" style="width: 110px;">Källa (Ref)</th>
               <th data-sort="name">Namn</th>
               <th data-sort="city">Hemort</th>
-              <th>Telefon & E-post</th>
-              <th data-sort="score">Poäng</th>
-              <th data-sort="tiebreaker_guess">Utslagsgissning</th>
+              <th>Kontaktuppgifter</th>
+              <th data-sort="score" style="width: 80px;">Poäng</th>
+              <th data-sort="tiebreaker_guess" style="width: 190px;">Utslagsgissning</th>
               <th>Önskad vinst</th>
-              <th>Status</th>
-              <th style="width: 40px;"></th>
+              <th>Status / Kryss</th>
+              <th style="width: 45px;"></th>
             </tr>
           </thead>
           <tbody id="table-body">
             <tr>
-              <td colspan="10" style="text-align: center; padding: 2rem; color: #94a3b8;">
+              <td colspan="10" style="text-align: center; padding: 2.5rem; color: #94a3b8;">
                 Laddar deltagare...
               </td>
             </tr>
@@ -473,6 +630,7 @@
     let currentSort = 'created_at';
     let currentSortDir = 'DESC';
     let searchTimeout = null;
+    let latestStats = null;
 
     // Check login state on load
     document.addEventListener('DOMContentLoaded', () => {
@@ -524,15 +682,24 @@
       loadDashboardData();
     });
 
-    // Filter Buttons
-    document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+    // Static Filter Buttons
+    document.querySelectorAll('#primary-filter-tabs .filter-btn[data-filter]').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        loadDashboardData();
+        setActiveFilter(btn.dataset.filter);
       });
     });
+
+    function setActiveFilter(filterName) {
+      currentFilter = filterName;
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.dataset.filter === filterName) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+      loadDashboardData();
+    }
 
     // Search Input
     document.getElementById('table-search').addEventListener('input', (e) => {
@@ -550,6 +717,7 @@
           currentSortDir = currentSortDir === 'DESC' ? 'ASC' : 'DESC';
         } else {
           currentSort = col;
+          currentSortDir = (col === 'score' || col === 'created_at') ? 'DESC' : 'ASC';
         }
         loadDashboardData();
       });
@@ -558,7 +726,7 @@
     // Load Data
     async function loadDashboardData() {
       const search = document.getElementById('table-search').value;
-      const url = `/api/quiz/admin/submissions?filter=${currentFilter}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}`;
+      const url = `/api/quiz/admin/submissions?filter=${encodeURIComponent(currentFilter)}&search=${encodeURIComponent(search)}&sortBy=${currentSort}&sortDir=${currentSortDir}`;
       const token = localStorage.getItem('quiz_admin_token');
       const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
 
@@ -577,7 +745,9 @@
           document.getElementById('view-dashboard').style.display = 'block';
           document.getElementById('btn-logout').style.display = 'block';
 
+          latestStats = data.stats;
           renderStats(data.stats);
+          renderDynamicSources(data.stats ? data.stats.sources : []);
           renderTable(data.submissions);
         }
       } catch (err) {
@@ -599,7 +769,36 @@
       document.getElementById('count-member').textContent = stats.wantMember || 0;
       document.getElementById('count-info').textContent = stats.wantInfo || 0;
       document.getElementById('count-perfect').textContent = stats.perfectScores || 0;
-      document.getElementById('count-kex').textContent = stats.fromKexchoklad || 0;
+    }
+
+    // Render Dynamic Source Buttons
+    function renderDynamicSources(sources) {
+      const container = document.getElementById('dynamic-sources-list');
+      if (!sources || sources.length === 0) {
+        container.innerHTML = '<span style="color: #94a3b8; font-size: 0.8rem;">Inga separata källor loggade ännu</span>';
+        return;
+      }
+
+      container.innerHTML = '';
+      sources.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (currentFilter === s.source ? ' active' : '');
+        btn.dataset.filter = s.source;
+
+        let icon = '🏷️';
+        const srcLower = (s.source || '').toLowerCase();
+        if (srcLower.includes('kex')) icon = '🍫';
+        else if (srcLower.includes('hemsida') || srcLower.includes('web')) icon = '🌐';
+        else if (srcLower.includes('face') || srcLower.includes('fb')) icon = '📱';
+        else if (srcLower.includes('insta')) icon = '📷';
+        else if (srcLower.includes('qr')) icon = '📷';
+
+        btn.innerHTML = `<span>${icon} ${escapeHtml(s.source)}</span> <strong>(${s.count})</strong>`;
+        btn.addEventListener('click', () => {
+          setActiveFilter(s.source);
+        });
+        container.appendChild(btn);
+      });
     }
 
     // Render Table
@@ -607,19 +806,35 @@
       const tbody = document.getElementById('table-body');
       tbody.innerHTML = '';
 
+      const isWinnersView = (currentFilter === 'winners_top3');
+      const banner = document.getElementById('winners-banner');
+      const targetTotalSpan = document.getElementById('winners-target-total');
+      const totalParticipants = latestStats ? parseInt(latestStats.total, 10) : 0;
+
+      if (isWinnersView) {
+        banner.style.display = 'block';
+        targetTotalSpan.textContent = totalParticipants;
+      } else {
+        banner.style.display = 'none';
+      }
+
       if (!submissions || submissions.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="9" style="text-align: center; padding: 2.5rem; color: #64748b;">
-              Inga tävlingsbidrag hittades för valt filter.
+            <td colspan="10" style="text-align: center; padding: 2.5rem; color: #64748b;">
+              ${isWinnersView ? 'Inga deltagare med 8/8 rätt registrerade ännu.' : 'Inga tävlingsbidrag hittades för valt filter.'}
             </td>
           </tr>
         `;
         return;
       }
 
-      submissions.forEach(s => {
+      submissions.forEach((s, idx) => {
         const tr = document.createElement('tr');
+        if (isWinnersView) {
+          tr.className = 'row-winner';
+        }
+
         const dateStr = s.created_at ? new Date(s.created_at).toLocaleString('sv-SE', {
           month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
         }) : '-';
@@ -639,18 +854,49 @@
           ? '<span class="badge badge-perfect">8/8</span>'
           : `<span class="badge badge-score">${s.score}/8</span>`;
 
+        let tiebreakerContent = '';
+        if (isWinnersView) {
+          const guess = parseInt(s.tiebreaker_guess, 10);
+          const diff = guess - totalParticipants;
+          let diffStr = '';
+          if (diff === 0) {
+            diffStr = '<span style="color:#047857; font-weight:800;">Exakt rätt!</span>';
+          } else if (diff > 0) {
+            diffStr = `<span style="color:#b45309; font-weight:700;">+${diff} från ${totalParticipants}</span>`;
+          } else {
+            diffStr = `<span style="color:#b45309; font-weight:700;">${diff} från ${totalParticipants}</span>`;
+          }
+
+          let rankBadge = '';
+          if (idx === 0) rankBadge = '<span class="badge badge-winner-gold">🥇 1:a Plats</span>';
+          else if (idx === 1) rankBadge = '<span class="badge badge-winner-silver">🥈 2:a Plats</span>';
+          else if (idx === 2) rankBadge = '<span class="badge badge-winner-bronze">🥉 3:e Plats</span>';
+
+          tiebreakerContent = `
+            <div style="display:flex; flex-direction:column; gap:0.25rem;">
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                ${rankBadge}
+                <strong style="font-size: 1.05rem; color: var(--admin-primary);">${s.tiebreaker_guess} st</strong>
+              </div>
+              <div style="font-size: 0.78rem;">Diff: ${diffStr}</div>
+            </div>
+          `;
+        } else {
+          tiebreakerContent = `<strong style="font-size: 0.95rem; color: var(--admin-primary);">${s.tiebreaker_guess}</strong> st`;
+        }
+
         tr.innerHTML = `
-          <td style="color: #64748b; font-size: 0.82rem; white-space: nowrap;">${dateStr}</td>
-          <td><span class="badge badge-score" style="text-transform: capitalize;">${s.source || 'kexchoklad'}</span></td>
-          <td><strong>${escapeHtml(s.name)}</strong></td>
+          <td style="color: #64748b; font-size: 0.85rem; white-space: nowrap;">${dateStr}</td>
+          <td><span class="badge badge-score" style="text-transform: capitalize;">${escapeHtml(s.source || 'kexchoklad')}</span></td>
+          <td><strong style="font-size: 0.95rem; color: #0f172a;">${escapeHtml(s.name)}</strong></td>
           <td><span style="font-weight: 600; color: #334155;">${escapeHtml(s.city || '-')}</span></td>
           <td>
-            <div><a href="tel:${escapeHtml(s.phone)}" style="color: var(--admin-primary); text-decoration: none;">${escapeHtml(s.phone)}</a></div>
-            <div style="font-size: 0.8rem; color: #64748b;"><a href="mailto:${escapeHtml(s.email)}" style="color: #64748b;">${escapeHtml(s.email)}</a></div>
+            <div><a href="tel:${escapeHtml(s.phone)}" style="color: var(--admin-accent); font-weight:600; text-decoration: none;">${escapeHtml(s.phone)}</a></div>
+            <div style="font-size: 0.82rem; color: #64748b;"><a href="mailto:${escapeHtml(s.email)}" style="color: #64748b;">${escapeHtml(s.email)}</a></div>
           </td>
           <td>${scoreBadge}</td>
-          <td><strong style="font-size: 1rem; color: var(--admin-primary);">${s.tiebreaker_guess}</strong> st</td>
-          <td style="font-size: 0.82rem; color: #475569;">${escapeHtml(s.prize_choice)}</td>
+          <td>${tiebreakerContent}</td>
+          <td style="font-size: 0.85rem; color: #475569;">${escapeHtml(s.prize_choice)}</td>
           <td>${badges}</td>
           <td>
             <button class="btn-delete-row" title="Radera testinlägg" onclick="handleDelete(${s.id})">

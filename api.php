@@ -363,33 +363,6 @@ if ($route === 'admin/submissions' && $method === 'GET') {
     $allowedCols = ['created_at', 'name', 'city', 'score', 'tiebreaker_guess', 'source'];
     if (!in_array($sortBy, $allowedCols)) $sortBy = 'created_at';
 
-    $where = [];
-    $params = [];
-
-    if ($filter === 'member') {
-        $where[] = "want_member = 1";
-    } elseif ($filter === 'info') {
-        $where[] = "want_info = 1";
-    } elseif ($filter === 'perfect') {
-        $where[] = "score = 8";
-    } elseif ($filter === 'kexchoklad') {
-        $where[] = "source = 'kexchoklad'";
-    }
-
-    if ($search !== '') {
-        $where[] = "(name LIKE ? OR phone LIKE ? OR email LIKE ? OR city LIKE ?)";
-        $params[] = "%{$search}%";
-        $params[] = "%{$search}%";
-        $params[] = "%{$search}%";
-        $params[] = "%{$search}%";
-    }
-
-    $whereSql = count($where) > 0 ? "WHERE " . implode(' AND ', $where) : "";
-    $stmt = $pdo->prepare("SELECT id, created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member FROM quiz_submissions {$whereSql} ORDER BY {$sortBy} {$sortDir}");
-    $stmt->execute($params);
-    $submissions = $stmt->fetchAll();
-
-    // Stats
     $statsStmt = $pdo->query("
         SELECT 
             COUNT(*) as total,
@@ -403,6 +376,60 @@ if ($route === 'admin/submissions' && $method === 'GET') {
     $stats = $statsStmt->fetch() ?: [
         'total' => 0, 'wantMember' => 0, 'wantInfo' => 0, 'perfectScores' => 0, 'fromKexchoklad' => 0, 'avgScore' => '0.0'
     ];
+
+    // Source breakdown for dynamic buttons
+    $sourcesStmt = $pdo->query("SELECT source, COUNT(*) as count FROM quiz_submissions GROUP BY source ORDER BY count DESC");
+    $stats['sources'] = $sourcesStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    if ($filter === 'winners_top3') {
+        $totalCount = (int)($stats['total'] ?? 0);
+        $searchSql = "";
+        $searchParams = [];
+        if ($search !== '') {
+            $searchSql = "AND (name LIKE ? OR phone LIKE ? OR email LIKE ? OR city LIKE ?)";
+            $searchParams = ["%{$search}%", "%{$search}%", "%{$search}%", "%{$search}%"];
+        }
+        $stmtPerfect = $pdo->prepare("SELECT id, created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member FROM quiz_submissions WHERE score = 8 {$searchSql}");
+        $stmtPerfect->execute($searchParams);
+        $perfectRows = $stmtPerfect->fetchAll();
+
+        usort($perfectRows, function($a, $b) use ($totalCount) {
+            $diffA = abs((int)$a['tiebreaker_guess'] - $totalCount);
+            $diffB = abs((int)$b['tiebreaker_guess'] - $totalCount);
+            if ($diffA === $diffB) {
+                return strcmp($a['created_at'], $b['created_at']);
+            }
+            return $diffA <=> $diffB;
+        });
+        $submissions = array_slice($perfectRows, 0, 3);
+    } else {
+        if ($filter === 'member') {
+            $where[] = "want_member = 1";
+        } elseif ($filter === 'info') {
+            $where[] = "want_info = 1";
+        } elseif ($filter === 'perfect') {
+            $where[] = "score = 8";
+        } elseif (strpos($filter, 'source:') === 0) {
+            $where[] = "source = ?";
+            $params[] = substr($filter, 7);
+        } elseif ($filter !== 'all') {
+            $where[] = "source = ?";
+            $params[] = $filter;
+        }
+
+        if ($search !== '') {
+            $where[] = "(name LIKE ? OR phone LIKE ? OR email LIKE ? OR city LIKE ?)";
+            $params[] = "%{$search}%";
+            $params[] = "%{$search}%";
+            $params[] = "%{$search}%";
+            $params[] = "%{$search}%";
+        }
+
+        $whereSql = count($where) > 0 ? "WHERE " . implode(' AND ', $where) : "";
+        $stmt = $pdo->prepare("SELECT id, created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member FROM quiz_submissions {$whereSql} ORDER BY {$sortBy} {$sortDir}");
+        $stmt->execute($params);
+        $submissions = $stmt->fetchAll();
+    }
 
     jsonOut(['success' => true, 'submissions' => $submissions, 'stats' => $stats]);
 }

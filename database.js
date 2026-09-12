@@ -183,6 +183,43 @@ async function getSubmissions(filter = 'all', search = '', sortBy = 'created_at'
   const sortCol = validSortCols.includes(sortBy) ? sortBy : 'created_at';
   const order = sortDir.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
 
+  if (filter === 'winners_top3') {
+    let perfectWhere = ['score = 8'];
+    let perfectParams = [];
+    if (search && search.trim()) {
+      const s = `%${search.trim()}%`;
+      perfectWhere.push('(name LIKE ? OR city LIKE ? OR email LIKE ? OR phone LIKE ?)');
+      perfectParams.push(s, s, s, s);
+    }
+    const whereSql = `WHERE ${perfectWhere.join(' AND ')}`;
+    let rows = [];
+    if (dbType === 'mysql') {
+      const [r] = await mysqlPool.execute(`SELECT * FROM quiz_submissions ${whereSql}`, perfectParams);
+      rows = r;
+    } else {
+      rows = await new Promise((resolve, reject) => {
+        sqliteDb.all(`SELECT * FROM quiz_submissions ${whereSql}`, perfectParams, (err, r) => {
+          if (err) return reject(err);
+          resolve(r || []);
+        });
+      });
+    }
+
+    const stats = await getStats();
+    const totalCount = stats.total || 0;
+
+    rows.sort((a, b) => {
+      const diffA = Math.abs(parseInt(a.tiebreaker_guess, 10) - totalCount);
+      const diffB = Math.abs(parseInt(b.tiebreaker_guess, 10) - totalCount);
+      if (diffA === diffB) {
+        return new Date(a.created_at) - new Date(b.created_at);
+      }
+      return diffA - diffB;
+    });
+
+    return rows.slice(0, 3);
+  }
+
   let whereClauses = [];
   let params = [];
 
@@ -192,8 +229,12 @@ async function getSubmissions(filter = 'all', search = '', sortBy = 'created_at'
     whereClauses.push('want_info = 1');
   } else if (filter === 'perfect') {
     whereClauses.push('score = 8');
-  } else if (filter === 'kexchoklad') {
-    whereClauses.push("source = 'kexchoklad'");
+  } else if (filter && filter.startsWith('source:')) {
+    whereClauses.push('source = ?');
+    params.push(filter.substring(7));
+  } else if (filter && filter !== 'all') {
+    whereClauses.push('source = ?');
+    params.push(filter);
   }
 
   if (search && search.trim()) {
@@ -229,6 +270,7 @@ async function getStats() {
     const [infoRows] = await mysqlPool.query('SELECT COUNT(*) as count FROM quiz_submissions WHERE want_info = 1');
     const [kexRows] = await mysqlPool.query("SELECT COUNT(*) as count FROM quiz_submissions WHERE source = 'kexchoklad'");
     const [perfectRows] = await mysqlPool.query('SELECT COUNT(*) as count FROM quiz_submissions WHERE score = 8');
+    const [sourceRows] = await mysqlPool.query('SELECT source, COUNT(*) as count FROM quiz_submissions GROUP BY source ORDER BY count DESC');
 
     return {
       total: totalRows[0].total || 0,
@@ -237,6 +279,7 @@ async function getStats() {
       wantInfo: infoRows[0].count || 0,
       fromKexchoklad: kexRows[0].count || 0,
       perfectScores: perfectRows[0].count || 0,
+      sources: sourceRows || [],
       dbType
     };
   } else {
@@ -252,14 +295,17 @@ async function getStats() {
         FROM quiz_submissions
       `, (err, row) => {
         if (err) return reject(err);
-        resolve({
-          total: row ? (row.total || 0) : 0,
-          avgScore: (row && row.avgScore) ? parseFloat(row.avgScore).toFixed(1) : '0',
-          wantMember: row ? (row.wantMember || 0) : 0,
-          wantInfo: row ? (row.wantInfo || 0) : 0,
-          fromKexchoklad: row ? (row.fromKexchoklad || 0) : 0,
-          perfectScores: row ? (row.perfectScores || 0) : 0,
-          dbType
+        sqliteDb.all('SELECT source, COUNT(*) as count FROM quiz_submissions GROUP BY source ORDER BY count DESC', (sErr, sRows) => {
+          resolve({
+            total: row ? (row.total || 0) : 0,
+            avgScore: (row && row.avgScore) ? parseFloat(row.avgScore).toFixed(1) : '0',
+            wantMember: row ? (row.wantMember || 0) : 0,
+            wantInfo: row ? (row.wantInfo || 0) : 0,
+            fromKexchoklad: row ? (row.fromKexchoklad || 0) : 0,
+            perfectScores: row ? (row.perfectScores || 0) : 0,
+            sources: sRows || [],
+            dbType
+          });
         });
       });
     });
