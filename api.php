@@ -1,9 +1,7 @@
 <?php
 /**
- * Ale Quiz Backend API (PHP / MariaDB)
+ * Ale Quiz Backend API (PHP / MariaDB / SQLite Hybrid)
  * Moderaterna i Ale (ale.nu)
- * 
- * Körs direkt på LiteSpeed / Apache utan beroende av Node.js-daemoner.
  */
 
 header('Access-Control-Allow-Origin: *');
@@ -115,12 +113,15 @@ $questions = [
     ]
 ];
 
-// PDO Databasanslutning
+// Database connection with MariaDB + SQLite fallback and auto-sync
 function getDB() {
     global $dbHost, $dbName, $dbUser, $dbPass;
     static $pdo = null;
     if ($pdo !== null) return $pdo;
 
+    $sqlitePath = __DIR__ . '/data/quiz.db';
+
+    // Try MariaDB / MySQL first
     try {
         $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
         $pdo = new PDO($dsn, $dbUser, $dbPass, [
@@ -129,7 +130,7 @@ function getDB() {
             PDO::ATTR_EMULATE_PREPARES => false
         ]);
 
-        // Skapa tabell om den inte finns
+        // Create table in MySQL
         $pdo->exec("
             CREATE TABLE IF NOT EXISTS quiz_submissions (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -154,14 +155,78 @@ function getDB() {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         ");
 
-        // Kolla city kolumn
         try {
             $pdo->exec("ALTER TABLE quiz_submissions ADD COLUMN city VARCHAR(100) DEFAULT '' AFTER name;");
         } catch (Exception $e) {}
 
+        // Auto-sync SQLite rows to MySQL if SQLite file exists
+        if (file_exists($sqlitePath)) {
+            try {
+                $sqPdo = new PDO("sqlite:{$sqlitePath}");
+                $sqRows = $sqPdo->query("SELECT * FROM quiz_submissions")->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($sqRows as $r) {
+                    $chk = $pdo->prepare("SELECT id FROM quiz_submissions WHERE email = ? AND tiebreaker_guess = ? LIMIT 1");
+                    $chk->execute([$r['email'], $r['tiebreaker_guess']]);
+                    if (!$chk->fetch()) {
+                        $ins = $pdo->prepare("
+                            INSERT INTO quiz_submissions (created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ");
+                        $ins->execute([
+                            $r['created_at'] ?? date('Y-m-d H:i:s'),
+                            $r['source'] ?? 'kexchoklad',
+                            $r['name'] ?? '',
+                            $r['city'] ?? '',
+                            $r['phone'] ?? '',
+                            $r['email'] ?? '',
+                            $r['score'] ?? 0,
+                            $r['total_questions'] ?? 8,
+                            $r['tiebreaker_guess'] ?? 0,
+                            $r['prize_choice'] ?? '',
+                            $r['want_info'] ?? 0,
+                            $r['want_member'] ?? 0,
+                            $r['answers_json'] ?? '[]'
+                        ]);
+                    }
+                }
+            } catch (Exception $syncErr) {}
+        }
+
         return $pdo;
-    } catch (Exception $e) {
-        return null;
+    } catch (Exception $mySqlErr) {
+        // Fallback to SQLite
+        try {
+            if (!is_dir(__DIR__ . '/data')) {
+                @mkdir(__DIR__ . '/data', 0755, true);
+            }
+            $pdo = new PDO("sqlite:{$sqlitePath}", null, null, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS quiz_submissions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    source TEXT DEFAULT 'kexchoklad',
+                    name TEXT NOT NULL,
+                    city TEXT DEFAULT '',
+                    phone TEXT NOT NULL,
+                    email TEXT NOT NULL,
+                    score INTEGER NOT NULL,
+                    total_questions INTEGER NOT NULL DEFAULT 8,
+                    tiebreaker_guess INTEGER NOT NULL,
+                    prize_choice TEXT NOT NULL,
+                    want_info INTEGER DEFAULT 0,
+                    want_member INTEGER DEFAULT 0,
+                    answers_json TEXT,
+                    ip_address TEXT,
+                    user_agent TEXT
+                );
+            ");
+            return $pdo;
+        } catch (Exception $sqErr) {
+            return null;
+        }
     }
 }
 
@@ -191,7 +256,6 @@ function checkAuth() {
 
     if (!$token) return false;
 
-    // Enkel HMAC-token: payload.hash
     $parts = explode('.', $token);
     if (count($parts) !== 2) return false;
     $payload = $parts[0];
@@ -216,7 +280,6 @@ if (!$route) {
         $route = substr($uri, strpos($uri, '/api/') + 5);
     }
 }
-// Strip optional prefix 'quiz/'
 if (strpos($route, 'quiz/') === 0) {
     $route = substr($route, 5);
 }
@@ -277,22 +340,25 @@ if (($route === 'submit' || $route === 'quiz/submit') && $method === 'POST') {
         jsonOut(['error' => 'Vänligen fyll i alla obligatoriska fält inklusive hemort.'], 400);
     }
 
-    // Rättning
     $score = 0;
-    $details = [];
+    $detailedAnswers = [];
+
     foreach ($questions as $q) {
-        $userOptId = $answers[$q['id']] ?? null;
+        $qId = $q['id'];
+        $userOptId = $answers[$qId] ?? null;
+
         $correctOpt = null;
         $userOpt = null;
         foreach ($q['options'] as $o) {
             if ($o['isCorrect']) $correctOpt = $o;
-            if ($o['id'] === $userOptId) $userOpt = $o;
+            if ($userOptId && $o['id'] === $userOptId) $userOpt = $o;
         }
-        $isCorrect = ($correctOpt && $userOptId === $correctOpt['id']);
+
+        $isCorrect = ($correctOpt && $userOpt && $correctOpt['id'] === $userOpt['id']);
         if ($isCorrect) $score++;
 
-        $details[] = [
-            'questionId' => $q['id'],
+        $detailedAnswers[] = [
+            'questionId' => $qId,
             'question' => $q['question'],
             'userOptionId' => $userOptId,
             'userAnswerText' => $userOpt ? $userOpt['text'] : 'Inget svar',
@@ -303,16 +369,30 @@ if (($route === 'submit' || $route === 'quiz/submit') && $method === 'POST') {
         ];
     }
 
-    // Spara i databas
     $pdo = getDB();
     if ($pdo) {
         $stmt = $pdo->prepare("
-            INSERT INTO quiz_submissions (source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json, ip_address, user_agent)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO quiz_submissions (
+                source, name, city, phone, email, score, total_questions,
+                tiebreaker_guess, prize_choice, want_info, want_member,
+                answers_json, ip_address, user_agent
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
         $stmt->execute([
-            $source, $name, $city, $phone, $email, $score, 8, $tiebreaker, $prizeChoice, $wantInfo, $wantMember,
-            json_encode($details, JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
+            $source,
+            $name,
+            $city,
+            $phone,
+            $email,
+            $score,
+            8,
+            $tiebreaker,
+            $prizeChoice,
+            $wantInfo,
+            $wantMember,
+            json_encode($detailedAnswers, JSON_UNESCAPED_UNICODE),
+            $_SERVER['REMOTE_ADDR'] ?? '',
+            $_SERVER['HTTP_USER_AGENT'] ?? ''
         ]);
     }
 
@@ -343,7 +423,6 @@ if (($route === 'admin/login' || $route === 'quiz/admin/login') && $method === '
         jsonOut(['error' => 'Felaktigt administratörslösenord.'], 401);
     }
 
-    // Skapa HMAC token
     $payloadData = ['role' => 'admin', 'exp' => time() + 86400 * 7];
     $payloadB64 = base64_encode(json_encode($payloadData));
     $sig = hash_hmac('sha256', $payloadB64, $secretKey);
@@ -398,6 +477,8 @@ if (($route === 'admin/submissions' || $route === 'quiz/admin/submissions') && $
     $sourcesStmt = $pdo->query("SELECT source, COUNT(*) as count FROM quiz_submissions GROUP BY source ORDER BY count DESC");
     $stats['sources'] = $sourcesStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
 
+    $submissions = [];
+
     if ($filter === 'winners_top3') {
         $totalCount = (int)($stats['total'] ?? 0);
         $searchSql = "";
@@ -420,6 +501,9 @@ if (($route === 'admin/submissions' || $route === 'quiz/admin/submissions') && $
         });
         $submissions = array_slice($perfectRows, 0, 3);
     } else {
+        $where = [];
+        $params = [];
+
         if ($filter === 'member') {
             $where[] = "want_member = 1";
         } elseif ($filter === 'info') {
@@ -469,9 +553,10 @@ if (($route === 'admin/export' || $route === 'quiz/admin/export') && $method ===
     echo "ID;Datum;Källa;Namn;Hemort;Telefon;E-post;Poäng;Totalt;Utslagsgissning;Önskat pris;Vill ha info;Vill bli medlem\r\n";
 
     foreach ($rows as $r) {
-        $info = $r['want_info'] ? 'Ja' : 'Nej';
-        $member = $r['want_member'] ? 'Ja' : 'Nej';
-        echo "{$r['id']};{$r['created_at']};{$r['source']};\"{$r['name']}\";\"{$r['city']}\";\"{$r['phone']}\";\"{$r['email']}\";{$r['score']};{$r['total_questions']};{$r['tiebreaker_guess']};\"{$r['prize_choice']}\";{$info};{$member}\r\n";
+        $info = !empty($r['want_info']) ? 'Ja' : 'Nej';
+        $member = !empty($r['want_member']) ? 'Ja' : 'Nej';
+        $city = $r['city'] ?? '';
+        echo "{$r['id']};{$r['created_at']};{$r['source']};"{$r['name']}";"{$city}";"{$r['phone']}";"{$r['email']}";{$r['score']};{$r['total_questions']};{$r['tiebreaker_guess']};"{$r['prize_choice']}";{$info};{$member}\r\n";
     }
     exit;
 }
