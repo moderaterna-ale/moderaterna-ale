@@ -114,6 +114,9 @@ $questions = [
 ];
 
 // Database connection with MariaDB + SQLite fallback and auto-sync
+$GLOBALS['db_connected_driver'] = 'none';
+$GLOBALS['db_connection_error'] = '';
+
 function getDB() {
     global $dbHost, $dbName, $dbUser, $dbPass;
     static $pdo = null;
@@ -121,14 +124,32 @@ function getDB() {
 
     $sqlitePath = __DIR__ . '/data/quiz.db';
 
-    // Try MariaDB / MySQL first
-    try {
-        $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
-        $pdo = new PDO($dsn, $dbUser, $dbPass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ]);
+    // List of MySQL DSNs to try (localhost socket, 127.0.0.1 TCP, standard ports)
+    $dsns = [
+        "mysql:host=localhost;dbname={$dbName};charset=utf8mb4",
+        "mysql:host=127.0.0.1;port=3306;dbname={$dbName};charset=utf8mb4",
+        "mysql:host=localhost;port=3306;dbname={$dbName};charset=utf8mb4",
+        "mysql:unix_socket=/var/lib/mysql/mysql.sock;dbname={$dbName};charset=utf8mb4",
+        "mysql:unix_socket=/tmp/mysql.sock;dbname={$dbName};charset=utf8mb4"
+    ];
+
+    foreach ($dsns as $dsn) {
+        try {
+            $pdo = new PDO($dsn, $dbUser, $dbPass, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+            ]);
+            $GLOBALS['db_connected_driver'] = 'mysql (' . $dsn . ')';
+            break;
+        } catch (Exception $e) {
+            $GLOBALS['db_connection_error'] .= $dsn . ': ' . $e->getMessage() . ' | ';
+            $pdo = null;
+        }
+    }
+
+    if ($pdo !== null) {
 
         // Create table in MySQL
         $pdo->exec("
@@ -159,20 +180,60 @@ function getDB() {
             $pdo->exec("ALTER TABLE quiz_submissions ADD COLUMN city VARCHAR(100) DEFAULT '' AFTER name;");
         } catch (Exception $e) {}
 
+        // Auto-seed from material/ale-quiz-deltagare-2026-09-12.csv if table is empty or missing rows
+        $csvPath = __DIR__ . '/material/ale-quiz-deltagare-2026-09-12.csv';
+        if (file_exists($csvPath)) {
+            try {
+                $cntStmt = $pdo->query("SELECT COUNT(*) FROM quiz_submissions");
+                $currCount = (int)$cntStmt->fetchColumn();
+                if ($currCount < 200) {
+                    if (($handle = fopen($csvPath, "r")) !== FALSE) {
+                        $header = fgetcsv($handle, 2000, ";"); // Skip header
+                        $ins = $pdo->prepare("
+                            INSERT IGNORE INTO quiz_submissions 
+                            (id, created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ");
+                        while (($data = fgetcsv($handle, 2000, ";")) !== FALSE) {
+                            if (count($data) >= 13) {
+                                $ins->execute([
+                                    (int)$data[0],
+                                    $data[1],
+                                    $data[2],
+                                    $data[3],
+                                    $data[4],
+                                    $data[5],
+                                    $data[6],
+                                    (int)$data[7],
+                                    (int)$data[8],
+                                    (int)$data[9],
+                                    $data[10],
+                                    (mb_strtolower(trim($data[11])) === 'ja' ? 1 : 0),
+                                    (mb_strtolower(trim($data[12])) === 'ja' ? 1 : 0)
+                                ]);
+                            }
+                        }
+                        fclose($handle);
+                    }
+                }
+            } catch (Exception $csvErr) {}
+        }
+
         // Auto-sync SQLite rows to MySQL if SQLite file exists
         if (file_exists($sqlitePath)) {
             try {
                 $sqPdo = new PDO("sqlite:{$sqlitePath}");
                 $sqRows = $sqPdo->query("SELECT * FROM quiz_submissions")->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($sqRows as $r) {
-                    $chk = $pdo->prepare("SELECT id FROM quiz_submissions WHERE email = ? AND tiebreaker_guess = ? LIMIT 1");
-                    $chk->execute([$r['email'], $r['tiebreaker_guess']]);
+                    $chk = $pdo->prepare("SELECT id FROM quiz_submissions WHERE id = ? LIMIT 1");
+                    $chk->execute([$r['id']]);
                     if (!$chk->fetch()) {
                         $ins = $pdo->prepare("
-                            INSERT INTO quiz_submissions (created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            INSERT INTO quiz_submissions (id, created_at, source, name, city, phone, email, score, total_questions, tiebreaker_guess, prize_choice, want_info, want_member, answers_json)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         ");
                         $ins->execute([
+                            $r['id'],
                             $r['created_at'] ?? date('Y-m-d H:i:s'),
                             $r['source'] ?? 'kexchoklad',
                             $r['name'] ?? '',
