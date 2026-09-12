@@ -4,6 +4,10 @@
  * Moderaterna i Ale (ale.nu)
  */
 
+ini_set('display_errors', '0');
+error_reporting(0);
+ob_start();
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -349,6 +353,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 // JSON Helper
 function jsonOut($data, $code = 200) {
+    if (ob_get_length()) ob_clean();
     http_response_code($code);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
