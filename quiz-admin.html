@@ -705,7 +705,15 @@
           body: JSON.stringify({ password: pwd })
         });
 
-        const data = await res.json();
+        const rawText = await res.text();
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch (parseErr) {
+          const cleanErr = rawText.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim();
+          throw new Error(cleanErr || 'Ogiltigt svar från servern.');
+        }
+
         if (data.success && data.token) {
           localStorage.setItem('quiz_admin_token', data.token);
           showDashboard();
@@ -806,7 +814,16 @@
           return;
         }
 
-        const data = await res.json();
+        const rawText = await res.text();
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch (parseErr) {
+          const cleanErr = rawText.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim();
+          console.error('Server data response:', rawText);
+          alert('Servermeddelande vid hämtning av svar: ' + cleanErr);
+          return;
+        }
         if (data.success) {
           showDashboard();
           latestStats = data.stats;
