@@ -465,7 +465,7 @@ if (($route === 'admin/export' || $route === 'quiz/admin/export') && $method ===
         $info = !empty($r['want_info']) ? 'Ja' : 'Nej';
         $member = !empty($r['want_member']) ? 'Ja' : 'Nej';
         $city = $r['city'] ?? '';
-        echo "{$r['id']};{$r['created_at']};{$r['source']};"{$r['name']}";"{$city}";"{$r['phone']}";"{$r['email']}";{$r['score']};{$r['total_questions']};{$r['tiebreaker_guess']};"{$r['prize_choice']}";{$info};{$member}\r\n";
+        echo "{$r['id']};{$r['created_at']};{$r['source']};\"{$r['name']}\";\"{$city}\";\"{$r['phone']}\";\"{$r['email']}\";{$r['score']};{$r['total_questions']};{$r['tiebreaker_guess']};\"{$r['prize_choice']}\";{$info};{$member}\r\n";
     }
     exit;
 }
