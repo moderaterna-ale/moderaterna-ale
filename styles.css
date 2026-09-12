@@ -2039,5 +2039,218 @@ body {
   width: calc(100% + 4rem);
 }
 
+/* ==========================================================================
+   Valdagen 2026 / 3 Skäl Snabbguide Section
+   ========================================================================== */
+.valdag-section {
+  margin: -2.5rem auto 3.5rem auto;
+  max-width: 1200px;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
 
+.valdag-container-card {
+  background: var(--surface-white);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
 
+.valdag-header-block {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.valdag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.valdag-main-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: var(--primary-dark);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+
+.valdag-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.reasons-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.reason-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+}
+
+.reason-box:hover {
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-hover);
+}
+
+.reason-number-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-bright) 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 10px rgba(15, 37, 55, 0.2);
+}
+
+.reason-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.reason-core-text {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.reason-body-text {
+  font-size: 0.92rem;
+  color: var(--text-body);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.reason-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--primary-bright);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: var(--transition);
+  margin-top: auto;
+}
+
+.reason-link svg {
+  transition: transform 0.2s ease;
+}
+
+.reason-link:hover {
+  color: var(--primary-dark);
+}
+
+.reason-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* Quick Action bar for voters */
+.valdag-quick-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.btn-valdag-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-valdag-primary {
+  background: var(--primary-dark);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-valdag-primary:hover {
+  background: var(--primary-bright);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-valdag-secondary {
+  background: #f1f5f9;
+  color: var(--primary-dark);
+  border: 1px solid #cbd5e1;
+}
+
+.btn-valdag-secondary:hover {
+  background: #e2e8f0;
+  border-color: var(--accent-cyan);
+  color: var(--primary-bright);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 960px) {
+  .reasons-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .valdag-section {
+    margin-top: -1.5rem;
+    padding: 0 1rem;
+  }
+  .valdag-container-card {
+    padding: 1.75rem 1.25rem;
+  }
+  .valdag-quick-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-valdag-action {
+    width: 100%;
+    justify-content: center;
+  }
+}
