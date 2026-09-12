@@ -642,7 +642,10 @@
       e.preventDefault();
       const pwd = document.getElementById('login-password').value;
       const errBox = document.getElementById('login-error');
+      const submitBtn = document.getElementById('btn-submit-login');
       errBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Loggar in...';
 
       try {
         const res = await fetch('/api/quiz/admin/login', {
@@ -656,7 +659,7 @@
           if (data.token) {
             localStorage.setItem('quiz_admin_token', data.token);
           }
-          loadDashboardData();
+          await loadDashboardData();
         } else {
           errBox.textContent = data.error || 'Fel lösenord.';
           errBox.style.display = 'block';
@@ -664,13 +667,18 @@
       } catch (err) {
         errBox.textContent = 'Ett fel uppstod vid inloggning.';
         errBox.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Logga in</span>';
       }
     });
 
     // Logout
     document.getElementById('btn-logout').addEventListener('click', async () => {
       localStorage.removeItem('quiz_admin_token');
-      await fetch('/api/quiz/admin/logout', { method: 'POST' });
+      try {
+        await fetch('/api/quiz/admin/logout', { method: 'POST' });
+      } catch (e) {}
       document.getElementById('view-login').style.display = 'block';
       document.getElementById('view-dashboard').style.display = 'none';
       document.getElementById('btn-logout').style.display = 'none';
